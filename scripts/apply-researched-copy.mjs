@@ -3,7 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const draftDir = path.join(root, "tmp-content-drafts", "sections");
-const version = "20260601-research";
+const version = "20260601-flow-6";
 
 const routeIntros = {
   "silk-canal": {
@@ -478,41 +478,56 @@ function applySections() {
   writeJson("data/route-meta.json", meta);
 }
 
-function sectionArticle(route, index, draft) {
-  const paragraphs = [
-    draft.overview?.[0],
-    draft.essay?.[0],
-    draft.essay?.[1]
-  ].filter(Boolean);
-  return {
-    title: route.segments[index]?.name ?? `第 ${index + 1} 段`,
-    paragraphs: clean(paragraphs)
-  };
-}
-
 function applyRouteArticles() {
-  const drafts = allDrafts();
   const routeData = readJson("data/routes.json");
+  const analysis = readJson("data/route-analysis.json");
   const articles = readJson("data/route-articles.json");
-  const byRoute = Map.groupBy(drafts, (draft) => draft.routeId);
 
   for (const route of routeData.routes) {
     const intro = routeIntros[route.id];
     if (!intro) continue;
     const current = articles[route.id] ?? {};
-    const routeDrafts = (byRoute.get(route.id) ?? []).sort((a, b) => a.index - b.index);
+    const routeAnalysis = analysis[route.id];
     articles[route.id] = clean({
       ...current,
       headline: intro.headline,
       deck: intro.deck,
       sections: [
         ...intro.sections,
-        ...routeDrafts.map(({ index, data }) => sectionArticle(route, index, data))
+        {
+          title: "地理转场",
+          paragraphs: [geoNarrative(routeAnalysis)].filter(Boolean)
+        },
+        {
+          title: "道路里的地方生活",
+          paragraphs: [
+            routeAnalysis?.roadSpine?.summary,
+            topStopsNarrative(current),
+            routeAnalysis?.terminals?.arc
+          ].filter(Boolean)
+        }
       ]
     });
   }
 
   writeJson("data/route-articles.json", articles);
+}
+
+function geoNarrative(routeAnalysis) {
+  const blocks = routeAnalysis?.geoBlocks ?? [];
+  if (!blocks.length) return "";
+  const names = blocks.map((block) => block.name).join("、");
+  const body = blocks
+    .map((block) => `${block.name}落在${block.range}，${block.copy}`)
+    .join("");
+  return `整条线可以先按地理板块来读：${names}。${body}`;
+}
+
+function topStopsNarrative(article) {
+  const stops = article?.topStops ?? [];
+  if (!stops.length) return "";
+  const names = stops.slice(0, 8).map((stop) => stop.name).join("、");
+  return `停靠点不是打卡清单，而是帮助人辨认路线层次的章节标题：${names}。它们把宏大的路线落到具体城镇、河谷、港口、山口和地方生活里。`;
 }
 
 function applyTopicArticles() {

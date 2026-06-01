@@ -8,7 +8,7 @@
       name="description"
       content="行车中国特别专题文章，沿多条路线的局部读出一片连续地理。"
     >
-    <link rel="stylesheet" href="styles.css?v=20260601-side-panel-flow-2">
+    <link rel="stylesheet" href="styles.css?v=20260601-photos-1">
   </head>
   <body>
     <header class="site-header">
@@ -27,20 +27,6 @@
     </header>
 
     <main class="topic-page">
-      <section class="topic-hero">
-        <div class="topic-hero-copy">
-          <a class="back-link" href="index.html#topics">返回特别专题</a>
-          <p class="eyebrow" id="topicKicker">专题文章</p>
-          <h1 id="topicTitle">专题文章</h1>
-          <p class="lede" id="topicDeck"></p>
-          <div class="fact-row" id="topicFacts"></div>
-        </div>
-        <figure class="topic-cover-image">
-          <img id="topicCover" alt="">
-          <figcaption id="topicCoverCaption"></figcaption>
-        </figure>
-      </section>
-
       <section class="topic-map-section" aria-label="专题地图">
         <div class="route-map-shell">
           <div class="map-panel topic-map-panel">
@@ -57,6 +43,16 @@
             </div>
           </div>
           <aside class="route-map-summary">
+            <p class="eyebrow" id="topicMapKicker">专题地图</p>
+            <h1 id="topicMapTitle">专题文章</h1>
+            <p class="section-intro" id="topicMapDeck"></p>
+            <figure class="map-summary-photo">
+              <img id="topicMapPhoto" alt="">
+              <figcaption>
+                <span id="topicMapPhotoCaption"></span>
+                <a id="topicMapPhotoCredit" href="#" rel="noreferrer" target="_blank"></a>
+              </figcaption>
+            </figure>
             <h2>专题地图</h2>
             <p id="topicMapSummary"></p>
             <div class="topic-map-legend" id="topicMapLegend"></div>
@@ -64,8 +60,15 @@
         </div>
       </section>
 
-      <section class="topic-article-grid">
-        <article class="topic-body" id="topicBody"></article>
+      <section class="topic-reading-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">实用读法</p>
+            <h2>这个专题怎么读</h2>
+          </div>
+          <p class="section-intro">先看相关路线、专题片段和交汇线索如何围拢成一个地理单元，再进入更舒展的风土长文。</p>
+        </div>
+        <article class="topic-body" id="topicReadingBody"></article>
         <aside class="topic-side-panel">
           <div>
             <h2>相关路线</h2>
@@ -81,6 +84,33 @@
           </div>
         </aside>
       </section>
+
+      <section class="topic-hero">
+        <div class="topic-hero-copy">
+          <a class="back-link" href="index.html#topics">返回特别专题</a>
+          <p class="eyebrow" id="topicKicker">专题文章</p>
+          <h2 id="topicTitle">专题文章</h2>
+          <p class="lede" id="topicDeck"></p>
+          <div class="fact-row" id="topicFacts"></div>
+        </div>
+        <figure class="topic-cover-image">
+          <img id="topicCover" alt="">
+          <figcaption>
+            <span id="topicCoverCaption"></span>
+            <a id="topicCoverCredit" href="#" rel="noreferrer" target="_blank"></a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="topic-longread-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">风土长文</p>
+            <h2>风土与历史地理</h2>
+          </div>
+        </div>
+        <article class="topic-body topic-longread-body" id="topicLongreadBody"></article>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -88,6 +118,6 @@
       <span>愿每一片专题，都像从总图上放大的一页山河。</span>
     </footer>
 
-    <script src="topic.js?v=20260601-research" type="module"></script>
+    <script src="topic.js?v=20260601-photos-1" type="module"></script>
   </body>
 </html>

@@ -1,3 +1,5 @@
+import { loadPagePhotos, primaryPhoto, setPhotoImage } from "./page-photos.js?v=20260601-photos-1";
+
 const svgNS = "http://www.w3.org/2000/svg";
 const viewBox = { width: 1000, height: 620, padding: 52 };
 const tileSize = 256;
@@ -18,6 +20,7 @@ const mapLayers = {
 const state = {
   routes: [],
   specialTopics: [],
+  pagePhotos: new Map(),
   selectedId: "silk-canal",
   showBranch: true,
   mapMode: "all",
@@ -79,14 +82,16 @@ init();
 
 async function init() {
   try {
-    const [routeResponse, topicResponse] = await Promise.all([
-      fetch("./data/routes.json?v=20260601-research"),
-      fetch("./data/special-topics.json?v=20260601-research")
+    const [routeResponse, topicResponse, photoPages] = await Promise.all([
+      fetch("./data/routes.json?v=20260601-flow-6"),
+      fetch("./data/special-topics.json?v=20260601-flow-6"),
+      loadPagePhotos()
     ]);
     const data = await routeResponse.json();
     const topics = await topicResponse.json();
     state.routes = data.routes;
     state.specialTopics = topics.topics ?? [];
+    state.pagePhotos = photoPages;
     renderStaticShell();
     render();
   } catch (error) {
@@ -105,6 +110,7 @@ async function init() {
 function renderStaticShell() {
   elements.routeCount.textContent = state.routes.length;
   elements.totalDistance.textContent = formatKm(sum(state.routes.map((route) => route.stats.totalKm)));
+  renderAtlasPhoto();
 
   elements.routePills.replaceChildren(...state.routes.map(createPill));
   elements.routeCards.replaceChildren(...state.routes.map(createCard));
@@ -177,7 +183,17 @@ function createCard(route) {
   card.dataset.order = String(route.order).padStart(2, "0");
   card.style.setProperty("--card-color", route.color);
   card.style.setProperty("--card-accent", route.accent);
-  card.style.setProperty("--card-image", `url("${route.image}")`);
+  const photo = primaryPhoto(state.pagePhotos, `route-${route.id}`);
+  card.style.setProperty("--card-image", `url("${photo?.file ?? route.image}")`);
+
+  const media = document.createElement("figure");
+  media.className = "route-card-photo";
+  const photoImage = document.createElement("img");
+  if (!setPhotoImage(photoImage, photo, `${route.title}沿线照片`)) {
+    photoImage.src = route.image;
+    photoImage.alt = `${route.title}封面图`;
+  }
+  media.append(photoImage);
 
   const top = document.createElement("div");
   top.className = "route-card-top";
@@ -204,7 +220,7 @@ function createCard(route) {
   meta.append(metaItem(`支线 ${formatKm(route.stats.branchKm)} 公里`));
 
   content.append(title, copy, meta);
-  card.append(top, content);
+  card.append(media, top, content);
   return card;
 }
 
@@ -400,8 +416,11 @@ function topicCard(topic, selectedRoute) {
   coverLink.className = "topic-card-cover";
   coverLink.href = `topic.html?topic=${encodeURIComponent(topic.id)}`;
   const cover = document.createElement("img");
-  cover.src = `assets/topic-covers/${topic.id}.svg?v=20260601-research`;
-  cover.alt = `${topic.title}封面图`;
+  const photo = primaryPhoto(state.pagePhotos, `topic-${topic.id}`);
+  if (!setPhotoImage(cover, photo, `${topic.title}专题照片`)) {
+    cover.src = `assets/topic-covers/${topic.id}.svg?v=20260601-flow-6`;
+    cover.alt = `${topic.title}封面图`;
+  }
   coverLink.append(cover);
 
   const kicker = document.createElement("span");
@@ -427,6 +446,14 @@ function topicCard(topic, selectedRoute) {
 
   card.append(coverLink, kicker, title, deck, routeList, actions);
   return card;
+}
+
+function renderAtlasPhoto() {
+  const photo = primaryPhoto(state.pagePhotos, "index");
+  const atlas = document.querySelector(".atlas");
+  if (!atlas || !photo) return;
+  atlas.classList.add("has-photo");
+  atlas.style.setProperty("--atlas-photo", `url("${photo.file}")`);
 }
 
 function topicRouteButton(routeId) {
@@ -484,7 +511,7 @@ function routeMetaItem(text) {
 }
 
 function routeLogoSrc(route) {
-  return `assets/route-logos/${route.id}.svg?v=20260601-research`;
+  return `assets/route-logos/${route.id}.svg?v=20260601-flow-6`;
 }
 
 function routeBadgeImage(route, className = "route-ref-badge") {

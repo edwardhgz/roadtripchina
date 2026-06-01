@@ -8,7 +8,7 @@
       name="description"
       content="行车中国单条路线文章，展示路线地图、道路骨架、地理板块、分段入口和相关专题。"
     >
-    <link rel="stylesheet" href="styles.css?v=20260601-side-panel-flow-2">
+    <link rel="stylesheet" href="styles.css?v=20260601-photos-1">
   </head>
   <body>
     <header class="site-header">
@@ -27,34 +27,6 @@
     </header>
 
     <main class="route-page">
-      <section class="route-hero">
-        <figure class="route-home-logo">
-          <img id="routeLogo" alt="">
-        </figure>
-        <div class="route-home-copy">
-          <a class="back-link" href="index.html#routes">返回八条线路</a>
-          <p class="eyebrow" id="routeKicker">路线主页</p>
-          <h1 id="routeTitle">路线主页</h1>
-          <p class="lede" id="routeDeck"></p>
-          <div class="route-home-meta" id="routeMeta" aria-label="路线基本信息"></div>
-          <div class="route-home-actions">
-            <a class="route-action is-primary" id="firstSectionLink" href="#">进入第一段</a>
-            <a class="route-action" href="#segments">查看分段</a>
-            <a class="route-action" href="#relatedTopics">相关专题</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="route-article-section" id="routeArticleSection">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">路线长文</p>
-            <h2 id="routeArticleTitle">沿线风土与历史地理</h2>
-          </div>
-        </div>
-        <article class="route-article-body" id="routeArticleBody"></article>
-      </section>
-
       <section class="route-map-section" aria-label="路线地图">
         <div class="route-map-shell">
           <div class="map-panel route-map-panel">
@@ -72,6 +44,16 @@
             </div>
           </div>
           <aside class="route-map-summary">
+            <p class="eyebrow" id="routeMapKicker">路线地图</p>
+            <h1 id="routeMapTitle">路线地图</h1>
+            <p class="section-intro" id="routeMapDeck"></p>
+            <figure class="map-summary-photo">
+              <img id="routeMapPhoto" alt="">
+              <figcaption>
+                <span id="routeMapPhotoCaption"></span>
+                <a id="routeMapPhotoCredit" href="#" rel="noreferrer" target="_blank"></a>
+              </figcaption>
+            </figure>
             <h2>路线开合</h2>
             <p id="terminalArc"></p>
             <dl class="line-list">
@@ -88,10 +70,10 @@
         </div>
       </section>
 
-      <section class="route-overview-section">
+      <section class="route-overview-section" id="routeReading">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">读线方式</p>
+            <p class="eyebrow">实用读法</p>
             <h2>这条线怎么读</h2>
           </div>
           <p class="section-intro" id="routeOverview"></p>
@@ -132,6 +114,30 @@
         </div>
       </section>
 
+      <section class="route-hero">
+        <figure class="route-home-logo">
+          <img class="route-hero-photo-image" id="routeHeroPhoto" alt="">
+          <img class="route-logo-mark" id="routeLogo" alt="">
+          <figcaption class="route-photo-credit">
+            <span id="routeHeroPhotoCaption"></span>
+            <a id="routeHeroPhotoCredit" href="#" rel="noreferrer" target="_blank"></a>
+          </figcaption>
+        </figure>
+        <div class="route-home-copy">
+          <a class="back-link" href="index.html#routes">返回八条线路</a>
+          <p class="eyebrow" id="routeKicker">路线主页</p>
+          <h2 id="routeTitle">路线主页</h2>
+          <p class="lede" id="routeDeck"></p>
+          <div class="route-home-meta" id="routeMeta" aria-label="路线基本信息"></div>
+          <div class="route-home-actions">
+            <a class="route-action is-primary" id="firstSectionLink" href="#">进入第一段</a>
+            <a class="route-action" href="#routeReading">这条线怎么读</a>
+            <a class="route-action" href="#routeLongread">读风土长文</a>
+            <a class="route-action" href="#relatedTopics">相关专题</a>
+          </div>
+        </div>
+      </section>
+
       <section class="route-block-section">
         <div class="section-heading">
           <div>
@@ -151,6 +157,17 @@
           <p class="section-intro">每个分段都展开更细的节点、节奏和位置关系。</p>
         </div>
         <div class="segments" id="segmentsList"></div>
+      </section>
+
+      <section class="route-article-section" id="routeLongread">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">风土长文</p>
+            <h2 id="routeArticleTitle">沿线风土与历史地理</h2>
+          </div>
+          <p class="section-intro">把沿线的历史地理、地方生活和道路气质放在同一条脉络里读，路线才会从一串地名变成一部山河行卷。</p>
+        </div>
+        <article class="route-article-body" id="routeArticleBody"></article>
       </section>
 
       <section class="route-block-section">
@@ -180,6 +197,6 @@
       <span>路线、分段与专题，共同组成这本公路旅行地图册。</span>
     </footer>
 
-    <script src="route.js?v=20260601-research" type="module"></script>
+    <script src="route.js?v=20260601-photos-1" type="module"></script>
   </body>
 </html>

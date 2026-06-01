@@ -8,7 +8,7 @@
       name="description"
       content="行车中国路线分段文章，展示单个章节的主题、节点和旅行节奏。"
     >
-    <link rel="stylesheet" href="styles.css?v=20260601-side-panel-flow-2">
+    <link rel="stylesheet" href="styles.css?v=20260601-photos-1">
   </head>
   <body>
     <header class="site-header">
@@ -27,11 +27,75 @@
     </header>
 
     <main class="section-page">
+      <section class="section-map-section" aria-label="分段地图">
+        <div class="section-map-shell">
+          <figure class="section-overview-map">
+            <div class="mini-map-toolbar" aria-label="分区地图缩放">
+              <button class="tool-button" id="sectionMapZoomOut" type="button" title="缩小地图">−</button>
+              <button class="tool-button" id="sectionMapZoomIn" type="button" title="放大地图">＋</button>
+            </div>
+            <svg id="sectionOverviewMap" role="img" aria-label="当前分段在全线中的位置" viewBox="0 0 420 260"></svg>
+            <figcaption id="sectionMapCaption"></figcaption>
+          </figure>
+          <aside class="section-map-summary">
+            <p class="eyebrow" id="sectionMapRouteName">分段地图</p>
+            <h1 id="sectionMapTitle">线路分段</h1>
+            <p class="section-intro" id="sectionMapDeck"></p>
+            <figure class="map-summary-photo">
+              <img id="sectionLeadPhoto" alt="">
+              <figcaption>
+                <span id="sectionLeadPhotoCaption"></span>
+                <a id="sectionLeadPhotoCredit" href="#" rel="noreferrer" target="_blank"></a>
+              </figcaption>
+            </figure>
+            <h2>先看它在全线里的位置</h2>
+            <p id="sectionMapSummary"></p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section-reading-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">实用读法</p>
+            <h2>这一段怎么读</h2>
+          </div>
+          <p class="section-intro">先辨认分段的来龙去脉、沿途节点与行车节奏，再把目光放慢，进入更深的风土与历史地理。</p>
+        </div>
+        <div class="section-detail-grid">
+          <article class="section-main-copy">
+            <div class="copy-block">
+              <h2>这一段怎么理解</h2>
+              <div id="sectionOverview"></div>
+            </div>
+            <div class="copy-block">
+              <h2>沿途节点</h2>
+              <ol class="section-node-list" id="sectionNodes"></ol>
+            </div>
+            <div class="copy-block">
+              <h2>旅行节奏</h2>
+              <div id="sectionRhythm"></div>
+            </div>
+          </article>
+
+          <aside class="section-side-panel">
+            <div>
+              <h2>主题线索</h2>
+              <ul class="tag-list" id="sectionThemes"></ul>
+            </div>
+            <div>
+              <h2>前后章节</h2>
+              <div class="section-nav-cards" id="sectionNavCards"></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
       <section class="section-hero">
         <div class="section-hero-copy">
           <a class="back-link" id="backToRoute" href="index.html#routes">返回路线主页</a>
           <p class="eyebrow" id="sectionRouteName">路线分段</p>
-          <h1 id="sectionTitle">线路分段</h1>
+          <h2 id="sectionTitle">线路分段</h2>
           <p class="lede" id="sectionDeck"></p>
           <div class="fact-row" id="sectionFacts"></div>
         </div>
@@ -44,47 +108,14 @@
         </figure>
       </section>
 
-      <section class="section-detail-grid">
-        <article class="section-main-copy">
-          <div class="copy-block">
-            <h2>这一段怎么理解</h2>
-            <div id="sectionOverview"></div>
-          </div>
-          <div class="copy-block">
-            <h2>沿途节点</h2>
-            <ol class="section-node-list" id="sectionNodes"></ol>
-          </div>
-          <div class="copy-block">
-            <h2>旅行节奏</h2>
-            <div id="sectionRhythm"></div>
-          </div>
-          <div class="copy-block section-longread">
+      <section class="section-longread-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">风土长文</p>
             <h2>风土与历史地理</h2>
-            <div id="sectionEssay"></div>
           </div>
-        </article>
-
-        <aside class="section-side-panel">
-          <div>
-            <h2>分区总览</h2>
-            <figure class="section-overview-map">
-              <div class="mini-map-toolbar" aria-label="分区地图缩放">
-                <button class="tool-button" id="sectionMapZoomOut" type="button" title="缩小地图">−</button>
-                <button class="tool-button" id="sectionMapZoomIn" type="button" title="放大地图">＋</button>
-              </div>
-              <svg id="sectionOverviewMap" role="img" aria-label="当前分段在全线中的位置" viewBox="0 0 420 260"></svg>
-              <figcaption id="sectionMapCaption"></figcaption>
-            </figure>
-          </div>
-          <div>
-            <h2>主题线索</h2>
-            <ul class="tag-list" id="sectionThemes"></ul>
-          </div>
-          <div>
-            <h2>前后章节</h2>
-            <div class="section-nav-cards" id="sectionNavCards"></div>
-          </div>
-        </aside>
+        </div>
+        <article class="section-longread-copy" id="sectionEssay"></article>
       </section>
     </main>
 
@@ -93,6 +124,6 @@
       <span>愿每一段路，都能在地图上找到自己的山河位置。</span>
     </footer>
 
-    <script src="section.js?v=20260601-research" type="module"></script>
+    <script src="section.js?v=20260601-photos-1" type="module"></script>
   </body>
 </html>

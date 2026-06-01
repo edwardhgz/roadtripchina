@@ -3,12 +3,17 @@ import path from "node:path";
 
 const root = new URL("../", import.meta.url);
 const outputRoot = new URL("../assets/photos/page-photos/", import.meta.url);
+const photoSource = process.env.PHOTO_SOURCE ?? "openverse";
+const downloadMode = process.env.PHOTO_DOWNLOAD ?? "thumbnail";
 const maxPhotosPerPage = Number.parseInt(process.env.PHOTOS_PER_PAGE ?? "2", 10);
+const openversePageSize = Number.parseInt(process.env.OPENVERSE_PAGE_SIZE ?? "40", 10);
+const openverseSource = process.env.OPENVERSE_SOURCE ?? "";
+const requestedKeys = new Set((process.env.PHOTO_KEYS ?? "").split(",").map((key) => key.trim()).filter(Boolean));
 const thumbWidth = Number.parseInt(process.env.PHOTO_WIDTH ?? "1600", 10);
 const userAgent = "RoadtripChinaPhotoCollector/1.0 (local editorial research)";
-const requestDelayMs = Number.parseInt(process.env.COMMONS_DELAY_MS ?? "1300", 10);
+const requestDelayMs = Number.parseInt(process.env.PHOTO_REQUEST_DELAY_MS ?? process.env.COMMONS_DELAY_MS ?? "650", 10);
 const maxRetries = Number.parseInt(process.env.COMMONS_RETRIES ?? "6", 10);
-let lastCommonsRequestAt = 0;
+let lastPhotoRequestAt = 0;
 
 const routes = JSON.parse(await readFile(new URL("../data/route-meta.json", import.meta.url), "utf8"));
 const topics = JSON.parse(await readFile(new URL("../data/special-topics.json", import.meta.url), "utf8")).topics;
@@ -112,6 +117,10 @@ const excluded = [
   "railway map", "highway map", "population", "location", "outline"
 ];
 
+const existingManifest = await readExistingManifest();
+const existingPages = new Map((existingManifest?.pages ?? []).map((page) => [page.key, page]));
+const currentSource = photoSource === "openverse" ? "Openverse API" : "Wikimedia Commons API";
+
 const pages = [
   {
     key: "index",
@@ -148,29 +157,64 @@ const pages = [
   }))
 ];
 
-const usedFiles = new Set();
+const usedFiles = new Set(
+  (existingManifest?.pages ?? [])
+    .flatMap((page) => page.photos ?? [])
+    .map((photo) => photo.commonsTitle)
+    .filter(Boolean)
+);
 
 await mkdir(outputRoot, { recursive: true });
 
 const manifest = {
   generatedAt: new Date().toISOString(),
-  source: "Wikimedia Commons API",
-  licenseNote: "Images are copied from Wikimedia Commons thumbnails. Keep each page's author/license/source attribution with any public use.",
+  source: combinedSource(existingManifest?.source, currentSource),
+  licenseNote: "Images are copied from open-license sources for local hosting. Keep each page's author/license/source attribution with any public use.",
   photoWidth: thumbWidth,
   photosPerPage: maxPhotosPerPage,
   pages: []
 };
 
 for (const page of pages) {
-  const candidates = await collectCandidates(page);
-  const chosen = chooseCandidates(candidates, maxPhotosPerPage, usedFiles);
-  const saved = [];
+  const existingPage = existingPages.get(page.key);
+  const saved = [...(existingPage?.photos ?? [])].slice(0, maxPhotosPerPage);
   const pageDir = new URL(`${page.key}/`, outputRoot);
   await mkdir(pageDir, { recursive: true });
 
-  for (let i = 0; i < chosen.length; i += 1) {
-    const candidate = chosen[i];
-    const savedPhoto = await savePhoto(pageDir, page.key, i + 1, candidate);
+  if (requestedKeys.size && !requestedKeys.has(page.key)) {
+    manifest.pages.push({
+      key: page.key,
+      url: page.url,
+      kind: page.kind,
+      title: page.title,
+      queries: page.queries,
+      status: saved.length >= maxPhotosPerPage ? "ok" : saved.length ? "partial" : "missing",
+      photos: saved
+    });
+    console.log(`SKIP ${page.key}: outside PHOTO_KEYS`);
+    continue;
+  }
+
+  if (saved.length >= maxPhotosPerPage) {
+    manifest.pages.push({
+      key: page.key,
+      url: page.url,
+      kind: page.kind,
+      title: page.title,
+      queries: page.queries,
+      status: "ok",
+      photos: saved
+    });
+    console.log(`SKIP ${page.key}: ${saved.map((item) => item.file).join(", ")}`);
+    continue;
+  }
+
+  const candidates = await collectCandidates(page);
+  const chosen = chooseCandidates(candidates, Math.max(maxPhotosPerPage * 20, 40), usedFiles);
+
+  for (const candidate of chosen) {
+    if (saved.length >= maxPhotosPerPage) break;
+    const savedPhoto = await savePhoto(pageDir, page.key, saved.length + 1, candidate);
     if (savedPhoto) {
       saved.push(savedPhoto);
       usedFiles.add(candidate.title);
@@ -183,7 +227,7 @@ for (const page of pages) {
     kind: page.kind,
     title: page.title,
     queries: page.queries,
-    status: saved.length ? "ok" : "missing",
+    status: saved.length >= maxPhotosPerPage ? "ok" : saved.length ? "partial" : "missing",
     photos: saved
   });
 
@@ -192,13 +236,16 @@ for (const page of pages) {
 
 await writeFile(new URL("manifest.json", outputRoot), `${JSON.stringify(manifest, null, 2)}\n`);
 await writeFile(new URL("PHOTO_CREDITS.md", outputRoot), creditsMarkdown(manifest));
+await writeFile(new URL("MISSING_PHOTOS.md", outputRoot), missingMarkdown(manifest));
 
 console.log(`Saved ${manifest.pages.reduce((sum, page) => sum + page.photos.length, 0)} photos for ${manifest.pages.length} pages.`);
 
 async function collectCandidates(page) {
   const byTitle = new Map();
   for (const query of page.queries) {
-    const results = await commonsSearch(query);
+    const results = photoSource === "openverse"
+      ? await openverseSearch(query)
+      : await commonsSearch(query);
     for (const candidate of results) {
       const current = byTitle.get(candidate.title);
       const scored = { ...candidate, query, score: scoreCandidate(candidate, query) };
@@ -210,6 +257,57 @@ async function collectCandidates(page) {
     if (viableCount >= maxPhotosPerPage * 5) break;
   }
   return [...byTitle.values()].sort((a, b) => b.score - a.score);
+}
+
+async function openverseSearch(query) {
+  const params = new URLSearchParams({
+    q: query,
+    page_size: String(openversePageSize),
+    license_type: "commercial,modification",
+    mature: "false"
+  });
+  if (openverseSource) {
+    params.set("source", openverseSource);
+  }
+  const url = `https://api.openverse.org/v1/images/?${params}`;
+  const response = await photoFetch(url, { headers: { "user-agent": userAgent } });
+  if (!response.ok) {
+    console.warn(`Openverse API ${response.status} for ${query}`);
+    return [];
+  }
+  const json = await response.json();
+  return (json.results ?? [])
+    .map(normalizeOpenverseCandidate)
+    .filter((candidate) => candidate.mime?.startsWith("image/") && candidate.downloadUrl);
+}
+
+async function readExistingManifest() {
+  try {
+    return JSON.parse(await readFile(new URL("manifest.json", outputRoot), "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+function normalizeOpenverseCandidate(item) {
+  const license = item.license_version ? `${item.license?.toUpperCase()} ${item.license_version}` : item.license?.toUpperCase();
+  return {
+    title: item.id,
+    objectName: clean(item.title) || item.id,
+    description: clean(item.description ?? ""),
+    artist: clean(item.creator ?? ""),
+    credit: clean(item.provider ?? item.source ?? ""),
+    license,
+    licenseUrl: item.license_url ?? "",
+    sourceUrl: item.foreign_landing_url,
+    originalUrl: item.url,
+    downloadUrl: downloadMode === "original" ? item.url : (item.thumbnail || item.url),
+    mime: mimeFromOpenverse(item),
+    width: item.width ?? 0,
+    height: item.height ?? 0,
+    provider: item.provider,
+    source: item.source
+  };
 }
 
 async function commonsSearch(query) {
@@ -226,7 +324,7 @@ async function commonsSearch(query) {
     origin: "*"
   });
   const url = `https://commons.wikimedia.org/w/api.php?${params}`;
-  const response = await commonsFetch(url, { headers: { "user-agent": userAgent } });
+  const response = await photoFetch(url, { headers: { "user-agent": userAgent } });
   if (!response.ok) {
     console.warn(`Commons API ${response.status} for ${query}`);
     return [];
@@ -285,59 +383,69 @@ function chooseCandidates(candidates, count, used) {
 
 async function savePhoto(pageDir, pageKey, index, candidate) {
   try {
-    const response = await commonsFetch(candidate.downloadUrl, { headers: { "user-agent": userAgent } });
-    if (!response.ok) {
-      console.warn(`Download ${response.status} ${candidate.title}`);
-      return null;
+    const urls = [...new Set([candidate.downloadUrl, candidate.originalUrl].filter(Boolean))];
+    for (const url of urls) {
+      const response = await photoFetch(url, { headers: { "user-agent": userAgent } }, 1, { maxDelayMs: 15000 });
+      if (!response.ok) {
+        console.warn(`Download ${response.status} ${candidate.title}`);
+        continue;
+      }
+      const contentType = response.headers.get("content-type") ?? candidate.mime ?? "image/jpeg";
+      if (!contentType.startsWith("image/")) {
+        console.warn(`Download non-image ${contentType} ${candidate.title}`);
+        continue;
+      }
+      const extension = extensionFor(contentType, url);
+      const filename = `${String(index).padStart(2, "0")}${extension}`;
+      const bytes = Buffer.from(await response.arrayBuffer());
+      await writeFile(new URL(filename, pageDir), bytes);
+      return {
+        role: index === 1 ? "primary" : "alternate",
+        file: path.posix.join("assets/photos/page-photos", pageKey, filename),
+        title: candidate.objectName,
+        commonsTitle: candidate.title,
+        sourceUrl: candidate.sourceUrl,
+        originalUrl: candidate.originalUrl,
+        license: candidate.license,
+        licenseUrl: candidate.licenseUrl,
+        artist: candidate.artist,
+        credit: candidate.credit,
+        description: candidate.description,
+        width: candidate.width,
+        height: candidate.height,
+        query: candidate.query
+      };
     }
-    const contentType = response.headers.get("content-type") ?? candidate.mime ?? "image/jpeg";
-    const extension = extensionFor(contentType, candidate.downloadUrl);
-    const filename = `${String(index).padStart(2, "0")}${extension}`;
-    const bytes = Buffer.from(await response.arrayBuffer());
-    await writeFile(new URL(filename, pageDir), bytes);
-    return {
-      role: index === 1 ? "primary" : "alternate",
-      file: path.posix.join("assets/photos/page-photos", pageKey, filename),
-      title: candidate.objectName,
-      commonsTitle: candidate.title,
-      sourceUrl: candidate.sourceUrl,
-      originalUrl: candidate.originalUrl,
-      license: candidate.license,
-      licenseUrl: candidate.licenseUrl,
-      artist: candidate.artist,
-      credit: candidate.credit,
-      description: candidate.description,
-      width: candidate.width,
-      height: candidate.height,
-      query: candidate.query
-    };
+    return null;
   } catch (error) {
     console.warn(`Failed ${candidate.title}: ${error.message}`);
     return null;
   }
 }
 
-async function commonsFetch(url, options = {}, attempt = 1) {
-  await throttleCommons();
+async function photoFetch(url, options = {}, attempt = 1, retryOptions = {}) {
+  const { maxDelayMs = 600000 } = retryOptions;
+  await throttlePhotoRequests();
   const response = await fetch(url, options);
   if ((response.status === 429 || response.status >= 500) && attempt <= maxRetries) {
     const retryAfter = Number.parseFloat(response.headers.get("retry-after") ?? "");
     const delay = Number.isFinite(retryAfter)
       ? retryAfter * 1000
       : Math.min(45000, 3500 * attempt ** 1.55);
+    if (delay > maxDelayMs) return response;
     console.warn(`Retry ${attempt}/${maxRetries} after ${response.status}; waiting ${Math.round(delay)}ms`);
     await sleep(delay);
-    return commonsFetch(url, options, attempt + 1);
+    return photoFetch(url, options, attempt + 1, retryOptions);
   }
   return response;
 }
 
-async function throttleCommons() {
-  const elapsed = Date.now() - lastCommonsRequestAt;
+async function throttlePhotoRequests() {
+  const elapsed = Date.now() - lastPhotoRequestAt;
   if (elapsed < requestDelayMs) {
     await sleep(requestDelayMs - elapsed);
   }
-  lastCommonsRequestAt = Date.now();
+  lastPhotoRequestAt = Date.now();
 }
 
 function sleep(ms) {
@@ -350,6 +458,13 @@ function extensionFor(contentType, url) {
   if (contentType.includes("jpeg") || contentType.includes("jpg")) return ".jpg";
   const match = new URL(url).pathname.match(/\.(jpe?g|png|webp)$/i);
   return match ? `.${match[1].toLowerCase().replace("jpeg", "jpg")}` : ".jpg";
+}
+
+function mimeFromOpenverse(item) {
+  if (item.filetype) return `image/${item.filetype.replace("jpg", "jpeg")}`;
+  const match = item.url?.match(/\.(jpe?g|png|webp)(?:[?#]|$)/i);
+  if (!match) return "image/jpeg";
+  return `image/${match[1].toLowerCase().replace("jpg", "jpeg")}`;
 }
 
 function clean(value = "") {
@@ -366,7 +481,7 @@ function creditsMarkdown(data) {
   const lines = [
     "# Page Photo Credits",
     "",
-    "Images were downloaded from Wikimedia Commons thumbnails for local hosting. Keep attribution visible where these photos are used.",
+    `Images were downloaded through ${data.source} for local hosting. Keep attribution visible where these photos are used.`,
     ""
   ];
   for (const page of data.pages) {
@@ -386,5 +501,53 @@ function creditsMarkdown(data) {
     }
     lines.push("");
   }
+  return `${lines.join("\n")}\n`;
+}
+
+function combinedSource(previous, current) {
+  const sources = [previous, current]
+    .flatMap((value) => `${value ?? ""}`.split(/\s+and\s+/i))
+    .map((value) => value.trim())
+    .filter(Boolean);
+  return [...new Set(sources)].join(" and ") || current;
+}
+
+function missingMarkdown(data) {
+  const missing = data.pages.filter((page) => !page.photos.length);
+  const partial = data.pages.filter((page) => page.photos.length > 0 && page.photos.length < data.photosPerPage);
+  const lines = [
+    "# Missing Page Photos",
+    "",
+    `Generated at: ${data.generatedAt}`,
+    `Target photos per page: ${data.photosPerPage}`,
+    `Complete pages: ${data.pages.length - missing.length - partial.length}/${data.pages.length}`,
+    `Missing pages: ${missing.length}`,
+    `Partial pages: ${partial.length}`,
+    ""
+  ];
+
+  if (partial.length) {
+    lines.push("## Partial");
+    lines.push("");
+    for (const page of partial) {
+      lines.push(`- ${page.key}: ${page.title}`);
+      lines.push(`  URL: ${page.url}`);
+      lines.push(`  Photos: ${page.photos.length}/${data.photosPerPage}`);
+      lines.push(`  Queries: ${page.queries.join(" | ")}`);
+    }
+    lines.push("");
+  }
+
+  if (missing.length) {
+    lines.push("## Missing");
+    lines.push("");
+    for (const page of missing) {
+      lines.push(`- ${page.key}: ${page.title}`);
+      lines.push(`  URL: ${page.url}`);
+      lines.push(`  Queries: ${page.queries.join(" | ")}`);
+    }
+    lines.push("");
+  }
+
   return `${lines.join("\n")}\n`;
 }

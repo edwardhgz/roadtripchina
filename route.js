@@ -1,3 +1,5 @@
+import { alternatePhoto, loadPagePhotos, primaryPhoto, setPhotoCredit, setPhotoImage } from "./page-photos.js?v=20260601-photos-1";
+
 const svgNS = "http://www.w3.org/2000/svg";
 const tileSize = 256;
 const viewBox = { width: 1000, height: 620, padding: 52 };
@@ -20,6 +22,7 @@ const state = {
   route: null,
   routes: [],
   topics: [],
+  pagePhotos: new Map(),
   basemap: "admin",
   showBranch: true,
   zoomDelta: 0,
@@ -28,11 +31,20 @@ const state = {
 
 const elements = {
   routeLogo: document.querySelector("#routeLogo"),
+  routeHeroPhoto: document.querySelector("#routeHeroPhoto"),
+  routeHeroPhotoCaption: document.querySelector("#routeHeroPhotoCaption"),
+  routeHeroPhotoCredit: document.querySelector("#routeHeroPhotoCredit"),
   routeKicker: document.querySelector("#routeKicker"),
   routeTitle: document.querySelector("#routeTitle"),
   routeDeck: document.querySelector("#routeDeck"),
+  routeMapKicker: document.querySelector("#routeMapKicker"),
+  routeMapTitle: document.querySelector("#routeMapTitle"),
+  routeMapDeck: document.querySelector("#routeMapDeck"),
+  routeMapPhoto: document.querySelector("#routeMapPhoto"),
+  routeMapPhotoCaption: document.querySelector("#routeMapPhotoCaption"),
+  routeMapPhotoCredit: document.querySelector("#routeMapPhotoCredit"),
   routeMeta: document.querySelector("#routeMeta"),
-  routeArticleSection: document.querySelector("#routeArticleSection"),
+  routeArticleSection: document.querySelector("#routeLongread"),
   routeArticleTitle: document.querySelector("#routeArticleTitle"),
   routeArticleBody: document.querySelector("#routeArticleBody"),
   firstSectionLink: document.querySelector("#firstSectionLink"),
@@ -66,11 +78,12 @@ init();
 
 async function init() {
   try {
-    const [routeResponse, articleResponse, analysisResponse, topicResponse] = await Promise.all([
-      fetch("./data/routes.json?v=20260601-research"),
-      fetch("./data/route-articles.json?v=20260601-research"),
-      fetch("./data/route-analysis.json?v=20260601-research"),
-      fetch("./data/special-topics.json?v=20260601-research")
+    const [routeResponse, articleResponse, analysisResponse, topicResponse, photoPages] = await Promise.all([
+      fetch("./data/routes.json?v=20260601-flow-6"),
+      fetch("./data/route-articles.json?v=20260601-flow-6"),
+      fetch("./data/route-analysis.json?v=20260601-flow-6"),
+      fetch("./data/special-topics.json?v=20260601-flow-6"),
+      loadPagePhotos()
     ]);
     const routeData = await routeResponse.json();
     const articles = await articleResponse.json();
@@ -83,6 +96,7 @@ async function init() {
     }));
     state.route = state.routes.find((route) => route.id === routeId) ?? state.routes[0];
     state.topics = topicData.topics ?? [];
+    state.pagePhotos = photoPages;
 
     attachEvents();
     renderRoutePage();
@@ -140,9 +154,14 @@ function renderRoutePage() {
 
   elements.routeLogo.src = routeLogoSrc(route);
   elements.routeLogo.alt = `${route.title}徽章`;
+  renderRouteMapPhoto(route);
+  renderRouteHeroPhoto(route);
   elements.routeKicker.textContent = route.kicker;
   elements.routeTitle.textContent = route.title;
   elements.routeDeck.textContent = article.deck ?? route.tagline;
+  elements.routeMapKicker.textContent = route.kicker;
+  elements.routeMapTitle.textContent = route.title;
+  elements.routeMapDeck.textContent = article.deck ?? route.tagline;
   elements.routeMeta.replaceChildren(
     metaItem(`${String(route.order).padStart(2, "0")} 号路线`),
     metaItem(`全程 ${formatKm(route.stats.totalKm)} 公里`),
@@ -200,6 +219,16 @@ function renderSegments(route) {
       const link = document.createElement("a");
       link.className = "segment-card";
       link.href = `section.html?route=${encodeURIComponent(route.id)}&segment=${index}`;
+      const photo = primaryPhoto(state.pagePhotos, sectionPhotoKey(route.id, index));
+
+      if (photo) {
+        const media = document.createElement("figure");
+        media.className = "segment-card-photo";
+        const image = document.createElement("img");
+        setPhotoImage(image, photo, `${route.shortName}：${segment.name}`);
+        media.append(image);
+        link.append(media);
+      }
 
       const order = document.createElement("span");
       order.textContent = `${String(index + 1).padStart(2, "0")} · ${segment.range}`;
@@ -559,7 +588,7 @@ function crossingCard(crossing, index) {
   const map = document.createElement("figure");
   map.className = "crossing-map";
   const image = document.createElement("img");
-  image.src = `assets/crossing-maps/${state.route.id}-${String(index + 1).padStart(2, "0")}.svg?v=20260601-research`;
+  image.src = `assets/crossing-maps/${state.route.id}-${String(index + 1).padStart(2, "0")}.svg?v=20260601-flow-6`;
   image.alt = `${crossing.place}：${state.route.shortName}与${target?.shortName ?? crossing.withName}交汇局部图`;
   map.append(image);
 
@@ -597,8 +626,11 @@ function topicCard(topic) {
   coverLink.className = "topic-card-cover";
   coverLink.href = `topic.html?topic=${encodeURIComponent(topic.id)}`;
   const cover = document.createElement("img");
-  cover.src = `assets/topic-covers/${topic.id}.svg?v=20260601-research`;
-  cover.alt = `${topic.title}封面图`;
+  const photo = primaryPhoto(state.pagePhotos, `topic-${topic.id}`);
+  if (!setPhotoImage(cover, photo, `${topic.title}专题照片`)) {
+    cover.src = `assets/topic-covers/${topic.id}.svg?v=20260601-flow-6`;
+    cover.alt = `${topic.title}封面图`;
+  }
   coverLink.append(cover);
   const kicker = document.createElement("span");
   kicker.className = "topic-kicker";
@@ -618,6 +650,33 @@ function topicCard(topic) {
   action.append(link);
   card.append(coverLink, kicker, title, deck, routeList, action);
   return card;
+}
+
+function renderRouteHeroPhoto(route) {
+  const photo = alternatePhoto(state.pagePhotos, `route-${route.id}`);
+  if (!setPhotoImage(elements.routeHeroPhoto, photo, `${route.title}沿线照片`)) {
+    elements.routeHeroPhoto.hidden = true;
+    elements.routeHeroPhotoCaption.textContent = "";
+    elements.routeHeroPhotoCredit.hidden = true;
+    return;
+  }
+  elements.routeHeroPhoto.hidden = false;
+  setPhotoCredit(elements.routeHeroPhotoCaption, elements.routeHeroPhotoCredit, photo, route.title);
+}
+
+function renderRouteMapPhoto(route) {
+  const photo = primaryPhoto(state.pagePhotos, `route-${route.id}`);
+  const photoBlock = elements.routeMapPhoto?.closest(".map-summary-photo");
+  if (!setPhotoImage(elements.routeMapPhoto, photo, `${route.title}沿线照片`)) {
+    if (photoBlock) photoBlock.hidden = true;
+    return;
+  }
+  if (photoBlock) photoBlock.hidden = false;
+  setPhotoCredit(elements.routeMapPhotoCaption, elements.routeMapPhotoCredit, photo, route.title);
+}
+
+function sectionPhotoKey(routeId, index) {
+  return `section-${routeId}-${String(index + 1).padStart(2, "0")}`;
 }
 
 function topicRouteBadgeLink(routeId) {
@@ -648,7 +707,7 @@ function paragraph(text) {
 }
 
 function routeLogoSrc(route) {
-  return `assets/route-logos/${route.id}.svg?v=20260601-research`;
+  return `assets/route-logos/${route.id}.svg?v=20260601-flow-6`;
 }
 
 function routeBadgeImage(route, className = "route-ref-badge") {

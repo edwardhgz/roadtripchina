@@ -1,3 +1,5 @@
+import { alternatePhoto, loadPagePhotos, primaryPhoto, setPhotoCredit, setPhotoImage } from "./page-photos.js?v=20260601-photos-1";
+
 const svgNS = "http://www.w3.org/2000/svg";
 const tileSize = 256;
 const viewBox = { width: 1000, height: 620, padding: 52 };
@@ -20,6 +22,7 @@ const state = {
   topic: null,
   routes: [],
   traces: [],
+  pagePhotos: new Map(),
   basemap: "admin",
   zoomDelta: 0,
   mapPan: { x: 0, y: 0 }
@@ -29,10 +32,19 @@ const elements = {
   topicKicker: document.querySelector("#topicKicker"),
   topicTitle: document.querySelector("#topicTitle"),
   topicDeck: document.querySelector("#topicDeck"),
+  topicMapKicker: document.querySelector("#topicMapKicker"),
+  topicMapTitle: document.querySelector("#topicMapTitle"),
+  topicMapDeck: document.querySelector("#topicMapDeck"),
+  topicMapPhoto: document.querySelector("#topicMapPhoto"),
+  topicMapPhotoCaption: document.querySelector("#topicMapPhotoCaption"),
+  topicMapPhotoCredit: document.querySelector("#topicMapPhotoCredit"),
   topicFacts: document.querySelector("#topicFacts"),
   topicCover: document.querySelector("#topicCover"),
   topicCoverCaption: document.querySelector("#topicCoverCaption"),
-  topicBody: document.querySelector("#topicBody"),
+  topicCoverCredit: document.querySelector("#topicCoverCredit"),
+  topicReadingBody: document.querySelector("#topicReadingBody"),
+  topicLongreadBody: document.querySelector("#topicLongreadBody"),
+  topicLongreadSection: document.querySelector("#topicLongreadBody")?.closest(".topic-longread-section"),
   topicRoutes: document.querySelector("#topicRoutes"),
   topicFragments: document.querySelector("#topicFragments"),
   topicCrossing: document.querySelector("#topicCrossing"),
@@ -79,10 +91,11 @@ attachMapDrag(elements.topicMap, {
 
 async function init() {
   try {
-    const [routeResponse, topicResponse, articleResponse] = await Promise.all([
-      fetch("./data/routes.json?v=20260601-research"),
-      fetch("./data/special-topics.json?v=20260601-research"),
-      fetch("./data/topic-articles.json?v=20260601-research")
+    const [routeResponse, topicResponse, articleResponse, photoPages] = await Promise.all([
+      fetch("./data/routes.json?v=20260601-flow-6"),
+      fetch("./data/special-topics.json?v=20260601-flow-6"),
+      fetch("./data/topic-articles.json?v=20260601-flow-6"),
+      loadPagePhotos()
     ]);
     const routeData = await routeResponse.json();
     const topicData = await topicResponse.json();
@@ -90,6 +103,7 @@ async function init() {
     const routes = routeData.routes;
     const topic = topicData.topics.find((item) => item.id === topicId) ?? topicData.topics[0];
     const article = articleData[topic.id];
+    state.pagePhotos = photoPages;
 
     renderTopic(topic, article, routes);
   } catch (error) {
@@ -114,23 +128,50 @@ function renderTopic(topic, article, routes) {
   elements.topicKicker.textContent = topic.kicker;
   elements.topicTitle.textContent = article?.headline ?? topic.title;
   elements.topicDeck.textContent = article?.deck ?? topic.deck;
+  elements.topicMapKicker.textContent = topic.kicker;
+  elements.topicMapTitle.textContent = article?.headline ?? topic.title;
+  elements.topicMapDeck.textContent = article?.deck ?? topic.deck;
+  renderTopicMapPhoto(topic, article);
   elements.topicFacts.replaceChildren(
     fact(`${topic.routeIds.length} 条相关路线`),
     fact(`${topic.fragments.length} 个专题片段`),
     fact("可跳转到分段页")
   );
 
-  elements.topicCover.src = `assets/topic-covers/${topic.id}.svg?v=20260601-research`;
-  elements.topicCover.alt = `${topic.title}封面图`;
-  elements.topicCoverCaption.textContent = article?.caption ?? topic.deck;
-  elements.topicBody.replaceChildren(...articleBlocks(article));
+  renderTopicCover(topic, article);
+  elements.topicReadingBody.replaceChildren(...articleBlocks(article));
+  renderTopicLongread(article);
   elements.topicRoutes.replaceChildren(...topic.routeIds.map((routeId) => routeLink(routeId, routes)));
   elements.topicFragments.replaceChildren(...topic.fragments.map((fragment) => fragmentLink(fragment, routes)));
   elements.topicCrossing.textContent = topic.crossing;
-  elements.topicMapSummary.textContent = "";
-  elements.topicMapSummary.hidden = true;
+  elements.topicMapSummary.textContent = `${topic.fragments.length} 个片段把这一专题收束成一块连续地理；地图先标出片段位置，再让相关路线作为上下文退到周围。`;
+  elements.topicMapSummary.hidden = false;
   elements.topicMapLegend.replaceChildren(...state.traces.map(traceLegendLink));
   renderTopicMap();
+}
+
+function renderTopicCover(topic, article) {
+  const photo = alternatePhoto(state.pagePhotos, `topic-${topic.id}`);
+  if (setPhotoImage(elements.topicCover, photo, `${topic.title}专题照片`)) {
+    setPhotoCredit(elements.topicCoverCaption, elements.topicCoverCredit, photo, article?.caption ?? topic.deck);
+    return;
+  }
+
+  elements.topicCover.src = `assets/topic-covers/${topic.id}.svg?v=20260601-flow-6`;
+  elements.topicCover.alt = `${topic.title}封面图`;
+  elements.topicCoverCaption.textContent = article?.caption ?? topic.deck;
+  elements.topicCoverCredit.hidden = true;
+}
+
+function renderTopicMapPhoto(topic, article) {
+  const photo = primaryPhoto(state.pagePhotos, `topic-${topic.id}`);
+  const photoBlock = elements.topicMapPhoto?.closest(".map-summary-photo");
+  if (!setPhotoImage(elements.topicMapPhoto, photo, `${topic.title}专题照片`)) {
+    if (photoBlock) photoBlock.hidden = true;
+    return;
+  }
+  if (photoBlock) photoBlock.hidden = false;
+  setPhotoCredit(elements.topicMapPhotoCaption, elements.topicMapPhotoCredit, photo, article?.caption ?? topic.deck);
 }
 
 function renderTopicMap() {
@@ -178,15 +219,19 @@ function articleSection(section) {
 }
 
 function articleBlocks(article) {
-  const sections = [...(article?.sections ?? [])];
-  if (article?.longEssay?.length) {
-    sections.push({
-      title: "风土与历史地理",
-      className: "topic-longread",
-      paragraphs: article.longEssay
-    });
-  }
-  return sections.map(articleSection);
+  return (article?.sections ?? []).map(articleSection);
+}
+
+function renderTopicLongread(article) {
+  const paragraphs = article?.longEssay ?? [];
+  elements.topicLongreadSection.hidden = !paragraphs.length;
+  elements.topicLongreadBody.replaceChildren(
+    ...paragraphs.map((paragraphText) => {
+      const copy = document.createElement("p");
+      copy.textContent = paragraphText;
+      return copy;
+    })
+  );
 }
 
 function routeLink(routeId, routes) {
@@ -571,7 +616,7 @@ function clamp(value, min, max) {
 }
 
 function routeLogoSrc(route) {
-  return `assets/route-logos/${route.id}.svg?v=20260601-research`;
+  return `assets/route-logos/${route.id}.svg?v=20260601-flow-6`;
 }
 
 function routeBadgeImage(route, className = "route-ref-badge") {

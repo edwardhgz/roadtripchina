@@ -1,3 +1,5 @@
+import { alternatePhoto, loadPagePhotos, primaryPhoto, setPhotoCredit, setPhotoImage } from "./page-photos.js?v=20260601-photos-1";
+
 const svgNS = "http://www.w3.org/2000/svg";
 const tileSize = 256;
 const miniViewBox = { width: 420, height: 260 };
@@ -15,7 +17,8 @@ const state = {
   segment: null,
   index: 0,
   mapZoomDelta: 0,
-  mapPan: { x: 0, y: 0 }
+  mapPan: { x: 0, y: 0 },
+  pagePhotos: new Map()
 };
 
 const elements = {
@@ -23,6 +26,12 @@ const elements = {
   sectionRouteName: document.querySelector("#sectionRouteName"),
   sectionTitle: document.querySelector("#sectionTitle"),
   sectionDeck: document.querySelector("#sectionDeck"),
+  sectionMapRouteName: document.querySelector("#sectionMapRouteName"),
+  sectionMapTitle: document.querySelector("#sectionMapTitle"),
+  sectionMapDeck: document.querySelector("#sectionMapDeck"),
+  sectionLeadPhoto: document.querySelector("#sectionLeadPhoto"),
+  sectionLeadPhotoCaption: document.querySelector("#sectionLeadPhotoCaption"),
+  sectionLeadPhotoCredit: document.querySelector("#sectionLeadPhotoCredit"),
   sectionFacts: document.querySelector("#sectionFacts"),
   sectionImage: document.querySelector("#sectionImage"),
   sectionImageCaption: document.querySelector("#sectionImageCaption"),
@@ -31,9 +40,10 @@ const elements = {
   sectionNodes: document.querySelector("#sectionNodes"),
   sectionRhythm: document.querySelector("#sectionRhythm"),
   sectionEssay: document.querySelector("#sectionEssay"),
-  sectionEssayBlock: document.querySelector("#sectionEssay")?.closest(".copy-block"),
+  sectionEssayBlock: document.querySelector("#sectionEssay")?.closest(".section-longread-section"),
   sectionOverviewMap: document.querySelector("#sectionOverviewMap"),
   sectionMapCaption: document.querySelector("#sectionMapCaption"),
+  sectionMapSummary: document.querySelector("#sectionMapSummary"),
   sectionMapZoomOut: document.querySelector("#sectionMapZoomOut"),
   sectionMapZoomIn: document.querySelector("#sectionMapZoomIn"),
   sectionThemes: document.querySelector("#sectionThemes"),
@@ -63,10 +73,11 @@ attachMapDrag(elements.sectionOverviewMap, {
 
 async function init() {
   try {
-    const [routeResponse, articleResponse, detailResponse] = await Promise.all([
-      fetch("./data/routes.json?v=20260601-research"),
-      fetch("./data/route-articles.json?v=20260601-research"),
-      fetch("./data/section-details.json?v=20260601-research")
+    const [routeResponse, articleResponse, detailResponse, photoPages] = await Promise.all([
+      fetch("./data/routes.json?v=20260601-flow-6"),
+      fetch("./data/route-articles.json?v=20260601-flow-6"),
+      fetch("./data/section-details.json?v=20260601-flow-6"),
+      loadPagePhotos()
     ]);
     const data = await routeResponse.json();
     const articles = await articleResponse.json();
@@ -79,6 +90,7 @@ async function init() {
     const segment = route.segments[segmentIndex] ?? route.segments[0];
     const index = route.segments.indexOf(segment);
     const detail = details[route.id]?.[index];
+    state.pagePhotos = photoPages;
     state.route = route;
     state.segment = segment;
     state.index = index;
@@ -101,12 +113,16 @@ function renderSection(route, segment, index, detail) {
   elements.sectionRouteName.textContent = `${route.shortName} / 第 ${String(index + 1).padStart(2, "0")} 段`;
   elements.sectionTitle.textContent = segment.name;
   elements.sectionDeck.textContent = `${segment.range}。${segment.copy}`;
+  elements.sectionMapRouteName.textContent = `${route.shortName} / 第 ${String(index + 1).padStart(2, "0")} 段`;
+  elements.sectionMapTitle.textContent = segment.name;
+  elements.sectionMapDeck.textContent = `${segment.range}。${segment.copy}`;
   elements.sectionFacts.replaceChildren(
     fact(route.title),
     fact(segment.range),
     fact(index === route.segments.length - 1 ? "支线或收束段" : "可独立分段")
   );
 
+  renderLeadPhoto(route, segment, index, detail);
   renderImage(route, detail, index);
   renderCopy(route, segment, index, detail);
   renderNodes(route, segment, index, detail);
@@ -116,9 +132,16 @@ function renderSection(route, segment, index, detail) {
 }
 
 function renderImage(route, detail, index) {
+  const photo = alternatePhoto(state.pagePhotos, sectionPhotoKey(route.id, index));
+  if (photo) {
+    setPhotoImage(elements.sectionImage, photo, `${route.title}：${route.segments[index]?.name ?? "路线分段"}`);
+    setPhotoCredit(elements.sectionImageCaption, elements.sectionImageCredit, photo, detail?.imageCaption);
+    return;
+  }
+
   const image = detail
     ? {
-        url: `assets/section-images/${route.id}-${String(index + 1).padStart(2, "0")}.svg?v=20260601-research`,
+        url: `assets/section-images/${route.id}-${String(index + 1).padStart(2, "0")}.svg?v=20260601-flow-6`,
         alt: `${route.title}：${detail.imageCaption}`,
         caption: detail.imageCaption,
         credit: "行车中国分段视觉",
@@ -135,10 +158,25 @@ function renderImage(route, detail, index) {
   elements.sectionImageCredit.href = image.sourceUrl;
 }
 
+function renderLeadPhoto(route, segment, index, detail) {
+  const photo = primaryPhoto(state.pagePhotos, sectionPhotoKey(route.id, index));
+  const photoBlock = elements.sectionLeadPhoto?.closest(".map-summary-photo");
+  if (!setPhotoImage(elements.sectionLeadPhoto, photo, `${route.title}：${segment.name}`)) {
+    if (photoBlock) photoBlock.hidden = true;
+    return;
+  }
+  if (photoBlock) photoBlock.hidden = false;
+  setPhotoCredit(elements.sectionLeadPhotoCaption, elements.sectionLeadPhotoCredit, photo, detail?.imageCaption);
+}
+
+function sectionPhotoKey(routeId, index) {
+  return `section-${routeId}-${String(index + 1).padStart(2, "0")}`;
+}
+
 function renderCopy(route, segment, index, detail) {
   if (detail) {
-    elements.sectionOverview.replaceChildren(...detail.overview.map(paragraph));
-    elements.sectionRhythm.replaceChildren(...detail.rhythm.map(paragraph));
+    elements.sectionOverview.replaceChildren(...dedupeIntro(detail.overview, segment.copy).slice(0, 3).map(paragraph));
+    elements.sectionRhythm.replaceChildren(...dedupeIntro(detail.rhythm, segment.copy).slice(0, 3).map(paragraph));
     renderEssay(detail.essay);
     return;
   }
@@ -161,6 +199,20 @@ function renderCopy(route, segment, index, detail) {
 function renderEssay(essay = []) {
   elements.sectionEssayBlock.hidden = !essay.length;
   elements.sectionEssay.replaceChildren(...essay.map(paragraph));
+}
+
+function dedupeIntro(items = [], duplicate = "") {
+  const duplicateText = normalizeText(duplicate);
+  const filtered = items.filter((item, index) => {
+    if (index !== 0 || !duplicateText) return true;
+    const text = normalizeText(item);
+    return !(text.includes(duplicateText) || duplicateText.includes(text.slice(0, 48)));
+  });
+  return filtered.length ? filtered : items;
+}
+
+function normalizeText(text = "") {
+  return String(text).replace(/\s+/g, "").replace(/[，。；：、,.!?！？]/g, "");
 }
 
 function renderNodes(route, segment, index, detail) {
@@ -245,6 +297,7 @@ function renderOverviewMap(route, segment, index) {
   svg.append(svgPath(trace.coordinates, project, "mini-route-highlight", route.color));
 
   elements.sectionMapCaption.textContent = `高亮：第 ${String(index + 1).padStart(2, "0")} 段 / ${segment.name}`;
+  elements.sectionMapSummary.textContent = `${segment.name}是${route.shortName}的第 ${String(index + 1).padStart(2, "0")} 段。地图先标出它在全线中的位置，深色为当前分段，周围路线保留为上下文。`;
 }
 
 function createMiniTileLayer(viewport) {
