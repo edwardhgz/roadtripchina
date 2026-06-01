@@ -493,6 +493,82 @@ h4 {
   font-weight: 900;
 }
 
+.china-outline-layer {
+  pointer-events: none;
+}
+
+.china-outline-halo {
+  fill: rgba(255, 250, 240, 0.2);
+  stroke: rgba(255, 250, 240, 0.62);
+  stroke-linejoin: round;
+  stroke-width: 18;
+  filter: drop-shadow(0 22px 22px rgba(32, 36, 39, 0.14));
+}
+
+.china-outline-halo.is-island {
+  stroke-width: 10;
+}
+
+.china-land {
+  fill: rgba(255, 250, 240, 0.56);
+  stroke: rgba(38, 50, 50, 0.36);
+  stroke-linejoin: round;
+  stroke-width: 2.6;
+}
+
+.china-land.is-island {
+  fill: rgba(255, 250, 240, 0.5);
+  stroke-width: 2.1;
+}
+
+.china-art-line-layer {
+  mix-blend-mode: multiply;
+}
+
+.china-art-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.china-art-line.is-plateau {
+  stroke: rgba(141, 36, 30, 0.26);
+  stroke-dasharray: 18 18;
+  stroke-width: 5.6;
+}
+
+.china-art-line.is-yellow-river {
+  stroke: rgba(201, 145, 45, 0.38);
+  stroke-width: 6.4;
+}
+
+.china-art-line.is-yangtze {
+  stroke: rgba(29, 95, 134, 0.34);
+  stroke-width: 6.8;
+}
+
+.china-art-line.is-mountain {
+  stroke: rgba(10, 100, 95, 0.3);
+  stroke-dasharray: 10 12;
+  stroke-width: 4.6;
+}
+
+.china-art-line.is-hu-line {
+  stroke: rgba(32, 36, 39, 0.14);
+  stroke-dasharray: 3 13;
+  stroke-width: 3.8;
+}
+
+.china-map-label {
+  fill: rgba(37, 42, 45, 0.38);
+  paint-order: stroke;
+  stroke: rgba(255, 250, 240, 0.76);
+  stroke-width: 5;
+  font-family: var(--font-kai);
+  font-size: 18px;
+  font-weight: 900;
+}
+
 .atlas-route-shadow {
   stroke-linecap: round;
   stroke-linejoin: round;

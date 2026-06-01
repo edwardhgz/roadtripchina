@@ -17,6 +17,47 @@ const mapLayers = {
   }
 };
 
+const chinaOutline = [
+  {
+    name: "海南",
+    type: "island",
+    coordinates: [[109.475, 18.198], [108.655, 18.508], [108.626, 19.368], [109.119, 19.821], [110.212, 20.101], [110.787, 20.078], [111.01, 19.696], [110.571, 19.256], [110.339, 18.678], [109.475, 18.198]]
+  },
+  {
+    name: "大陆",
+    type: "mainland",
+    coordinates: [[80.26, 42.35], [80.18, 42.92], [80.866, 43.18], [79.966, 44.918], [81.947, 45.317], [82.459, 45.54], [83.18, 47.33], [85.164, 47.001], [85.72, 47.453], [85.768, 48.456], [86.599, 48.549], [87.36, 49.215], [87.751, 49.297], [88.014, 48.599], [88.854, 48.069], [90.281, 47.694], [90.971, 46.888], [90.586, 45.72], [90.946, 45.286], [92.134, 45.115], [93.481, 44.975], [94.689, 44.352], [95.307, 44.241], [95.762, 43.319], [96.349, 42.726], [97.452, 42.749], [99.516, 42.525], [100.846, 42.664], [101.833, 42.515], [103.312, 41.907], [104.522, 41.908], [104.965, 41.597], [106.129, 42.134], [107.745, 42.482], [109.244, 42.519], [110.412, 42.871], [111.13, 43.407], [111.83, 43.743], [111.668, 44.073], [111.348, 44.457], [111.873, 45.102], [112.436, 45.012], [113.464, 44.809], [114.46, 45.34], [115.985, 45.727], [116.718, 46.388], [117.422, 46.673], [118.874, 46.805], [119.663, 46.693], [119.773, 47.048], [118.867, 47.747], [118.064, 48.067], [117.296, 47.698], [116.309, 47.853], [115.743, 47.727], [115.485, 48.135], [116.192, 49.135], [116.679, 49.889], [117.879, 49.511], [119.288, 50.143], [119.279, 50.583], [120.182, 51.644], [120.738, 51.964], [120.726, 52.516], [120.177, 52.754], [121.003, 53.251], [122.246, 53.432], [123.571, 53.459], [125.068, 53.161], [125.946, 52.793], [126.564, 51.784], [126.939, 51.354], [127.287, 50.74], [127.657, 49.76], [129.398, 49.441], [130.582, 48.73], [130.987, 47.79], [132.507, 47.789], [133.374, 48.183], [135.026, 48.478], [134.501, 47.578], [134.112, 47.212], [133.77, 46.117], [133.097, 45.144], [131.883, 45.321], [131.025, 44.968], [131.289, 44.112], [131.145, 42.93], [130.634, 42.903], [130.64, 42.395], [129.994, 42.985], [129.597, 42.425], [128.052, 41.994], [128.208, 41.467], [127.344, 41.503], [126.869, 41.817], [126.182, 41.107], [125.08, 40.57], [124.266, 39.928], [122.868, 39.638], [122.131, 39.17], [121.055, 38.897], [121.586, 39.361], [121.377, 39.75], [122.169, 40.422], [121.64, 40.946], [120.769, 40.593], [119.64, 39.898], [119.023, 39.252], [118.043, 39.204], [117.533, 38.738], [118.06, 38.061], [118.878, 37.897], [118.912, 37.448], [119.703, 37.156], [120.823, 37.87], [121.711, 37.481], [122.358, 37.454], [122.52, 36.931], [121.104, 36.651], [120.637, 36.111], [119.665, 35.61], [119.151, 34.91], [120.228, 34.36], [120.62, 33.377], [121.229, 32.46], [121.908, 31.692], [121.892, 30.949], [121.264, 30.676], [121.504, 30.143], [122.092, 29.833], [121.938, 29.018], [121.684, 28.226], [121.126, 28.136], [120.395, 27.053], [119.585, 25.741], [118.657, 24.547], [117.282, 23.625], [115.891, 22.783], [114.764, 22.668], [114.153, 22.224], [113.807, 22.548], [113.241, 22.051], [111.844, 21.55], [110.785, 21.397], [110.444, 20.341], [109.89, 20.282], [109.628, 21.008], [109.864, 21.395], [108.523, 21.715], [108.05, 21.552], [107.043, 21.812], [106.567, 22.218], [106.725, 22.794], [105.811, 22.977], [105.329, 23.352], [104.477, 22.819], [103.505, 22.704], [102.707, 22.709], [102.17, 22.465], [101.652, 22.318], [101.803, 21.174], [101.27, 21.202], [101.18, 21.437], [101.15, 21.85], [100.417, 21.559], [99.983, 21.743], [99.241, 22.118], [99.532, 22.949], [98.899, 23.143], [98.66, 24.063], [97.605, 23.897], [97.725, 25.084], [98.672, 25.919], [98.712, 26.744], [98.683, 27.509], [98.246, 27.747], [97.912, 28.336], [97.327, 28.262], [96.249, 28.411], [96.587, 28.831], [96.118, 29.453], [95.405, 29.032], [94.566, 29.277], [93.413, 28.641], [92.503, 27.897], [91.697, 27.772], [91.259, 28.041], [90.731, 28.065], [90.016, 28.296], [89.476, 28.043], [88.814, 27.299], [88.73, 28.087], [88.12, 27.877], [86.955, 27.974], [85.823, 28.204], [85.012, 28.643], [84.235, 28.84], [83.899, 29.32], [83.337, 29.464], [82.328, 30.115], [81.526, 30.423], [81.111, 30.183], [79.721, 30.883], [78.739, 31.516], [78.458, 32.618], [79.176, 32.484], [79.209, 32.994], [78.811, 33.506], [78.912, 34.322], [77.837, 35.494], [76.193, 35.898], [75.897, 36.667], [75.158, 37.133], [74.98, 37.42], [74.83, 37.99], [74.865, 38.379], [74.258, 38.607], [73.929, 38.506], [73.675, 39.431], [73.96, 39.66], [73.822, 39.894], [74.777, 40.366], [75.468, 40.562], [76.526, 40.428], [76.904, 41.066], [78.187, 41.185], [78.544, 41.582], [80.119, 42.124], [80.26, 42.35]]
+  },
+  {
+    name: "台湾",
+    type: "island",
+    coordinates: [[121.778, 24.394], [121.176, 22.791], [120.747, 21.971], [120.22, 22.815], [120.106, 23.556], [120.695, 24.538], [121.495, 25.295], [121.951, 24.998], [121.778, 24.394]]
+  }
+];
+
+const chinaArtLines = [
+  {
+    className: "china-art-line is-plateau",
+    coordinates: [[74.4, 37.8], [81.4, 35.5], [88.9, 32.2], [96.7, 29.2], [102.8, 27.2], [106.2, 24.8]]
+  },
+  {
+    className: "china-art-line is-yellow-river",
+    coordinates: [[96.2, 35.4], [101.6, 36.3], [104.0, 36.0], [106.8, 37.6], [110.6, 39.5], [112.6, 34.9], [116.2, 35.0], [119.1, 37.4]]
+  },
+  {
+    className: "china-art-line is-yangtze",
+    coordinates: [[91.3, 32.9], [96.8, 32.0], [101.8, 30.8], [106.5, 29.6], [111.2, 30.6], [116.4, 30.7], [121.7, 31.2]]
+  },
+  {
+    className: "china-art-line is-mountain",
+    coordinates: [[103.0, 34.2], [107.4, 33.8], [111.1, 34.4], [114.8, 33.7], [119.1, 33.6]]
+  },
+  {
+    className: "china-art-line is-hu-line",
+    coordinates: [[127.6, 49.7], [121.6, 45.0], [114.8, 39.8], [108.5, 34.6], [101.9, 29.6], [98.4, 24.9]]
+  }
+];
+
 const state = {
   routes: [],
   specialTopics: [],
@@ -234,7 +275,7 @@ function render() {
   document.documentElement.style.setProperty("--theme", selected.color);
   document.documentElement.style.setProperty("--theme-accent", selected.accent);
   elements.mapCaption.textContent = "八线山河艺术总览";
-  elements.mapAttribution.textContent = "静态路线绘图";
+  elements.mapAttribution.textContent = "风格化中国轮廓 · 路线轨迹";
 
   document.querySelectorAll("[data-route-id]").forEach((node) => {
     node.classList.toggle("is-active", node.dataset.routeId === selected.id);
@@ -560,6 +601,7 @@ function renderMap() {
 
   elements.routeMap.replaceChildren();
   elements.routeMap.append(createAtlasBackdrop());
+  elements.routeMap.append(createChinaSilhouette(project));
   state.routes.forEach((route) => drawAtlasRoute(route, project, route.id === selected.id));
 }
 
@@ -727,6 +769,52 @@ function createAtlasBackdrop() {
   return group;
 }
 
+function createChinaSilhouette(project) {
+  const group = document.createElementNS(svgNS, "g");
+  group.setAttribute("class", "china-outline-layer");
+
+  chinaOutline.forEach((piece) => {
+    const d = closedPathData(piece.coordinates, project);
+    const halo = document.createElementNS(svgNS, "path");
+    halo.setAttribute("class", `china-outline-halo is-${piece.type}`);
+    halo.setAttribute("d", d);
+    group.append(halo);
+  });
+
+  chinaOutline.forEach((piece) => {
+    const land = document.createElementNS(svgNS, "path");
+    land.setAttribute("class", `china-land is-${piece.type}`);
+    land.setAttribute("d", closedPathData(piece.coordinates, project));
+    land.setAttribute("aria-label", `${piece.name}轮廓`);
+    group.append(land);
+  });
+
+  const lineGroup = document.createElementNS(svgNS, "g");
+  lineGroup.setAttribute("class", "china-art-line-layer");
+  chinaArtLines.forEach((lineItem) => {
+    lineGroup.append(decorativePath(lineItem.coordinates, project, lineItem.className));
+  });
+  group.append(lineGroup);
+
+  [
+    { name: "帕米尔", coordinate: [75.5, 38.2] },
+    { name: "青藏高原", coordinate: [90.8, 32.8] },
+    { name: "河西走廊", coordinate: [98.6, 39.3] },
+    { name: "华北平原", coordinate: [116.2, 37.4] },
+    { name: "东海", coordinate: [123.5, 29.2] }
+  ].forEach((label) => {
+    const point = project(label.coordinate);
+    const text = document.createElementNS(svgNS, "text");
+    text.setAttribute("class", "china-map-label");
+    text.setAttribute("x", point.x.toFixed(1));
+    text.setAttribute("y", point.y.toFixed(1));
+    text.textContent = label.name;
+    group.append(text);
+  });
+
+  return group;
+}
+
 function drawAtlasRoute(route, project, isSelected) {
   const group = document.createElementNS(svgNS, "g");
   group.setAttribute("class", `atlas-route-group ${isSelected ? "is-selected" : ""}`);
@@ -810,6 +898,17 @@ function pathData(coordinates, project) {
       return `${index === 0 ? "M" : "L"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`;
     })
     .join(" ");
+}
+
+function closedPathData(coordinates, project) {
+  return `${pathData(coordinates, project)} Z`;
+}
+
+function decorativePath(coordinates, project, className) {
+  const path = document.createElementNS(svgNS, "path");
+  path.setAttribute("class", className);
+  path.setAttribute("d", pathData(coordinates, project));
+  return path;
 }
 
 function drawMarkers(route, project) {
