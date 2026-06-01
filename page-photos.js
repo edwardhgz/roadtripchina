@@ -1,4 +1,5 @@
-const photoManifestUrl = "./assets/photos/page-photos/manifest.json?v=20260601-photos-1";
+const photoAssetVersion = "20260601-design-2";
+const photoManifestUrl = `./assets/photos/page-photos/manifest.json?v=${photoAssetVersion}`;
 
 let photoManifestPromise;
 
@@ -32,11 +33,15 @@ export function pagePhotos(photoPages, key) {
 
 export function setPhotoImage(image, photo, alt) {
   if (!image || !photo?.file) return false;
-  image.src = photo.file;
+  image.src = photoUrl(photo);
   image.alt = alt || photo.title || "";
   image.loading = "lazy";
   image.decoding = "async";
   return true;
+}
+
+export function photoUrl(photo) {
+  return photo?.file ? `${photo.file}?v=${photoAssetVersion}` : "";
 }
 
 export function setPhotoCredit(caption, link, photo, fallback = "") {

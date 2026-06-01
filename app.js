@@ -1,4 +1,4 @@
-import { loadPagePhotos, primaryPhoto, setPhotoImage } from "./page-photos.js?v=20260601-photos-1";
+import { loadPagePhotos, photoUrl, primaryPhoto, setPhotoImage } from "./page-photos.js?v=20260601-design-2";
 
 const svgNS = "http://www.w3.org/2000/svg";
 const viewBox = { width: 1000, height: 620, padding: 52 };
@@ -83,8 +83,8 @@ init();
 async function init() {
   try {
     const [routeResponse, topicResponse, photoPages] = await Promise.all([
-      fetch("./data/routes.json?v=20260601-flow-6"),
-      fetch("./data/special-topics.json?v=20260601-flow-6"),
+      fetch("./data/routes.json?v=20260601-design-2"),
+      fetch("./data/special-topics.json?v=20260601-design-2"),
       loadPagePhotos()
     ]);
     const data = await routeResponse.json();
@@ -153,15 +153,6 @@ function renderStaticShell() {
   });
 
   window.addEventListener("resize", () => renderMap());
-  attachMapDrag(elements.routeMap, {
-    getPan: () => state.mapPan,
-    setSuppress: () => {
-      state.mapDragSuppressUntil = Date.now() + 250;
-    },
-    render: renderMap,
-    width: viewBox.width,
-    height: viewBox.height
-  });
 }
 
 function createPill(route) {
@@ -184,7 +175,7 @@ function createCard(route) {
   card.style.setProperty("--card-color", route.color);
   card.style.setProperty("--card-accent", route.accent);
   const photo = primaryPhoto(state.pagePhotos, `route-${route.id}`);
-  card.style.setProperty("--card-image", `url("${photo?.file ?? route.image}")`);
+  card.style.setProperty("--card-image", `url("${photo ? photoUrl(photo) : route.image}")`);
 
   const media = document.createElement("figure");
   media.className = "route-card-photo";
@@ -242,8 +233,8 @@ function render() {
   document.documentElement.style.setProperty("--active", selected.color);
   document.documentElement.style.setProperty("--theme", selected.color);
   document.documentElement.style.setProperty("--theme-accent", selected.accent);
-  elements.mapCaption.textContent = state.mapMode === "all" ? "八线山河全图" : selected.title;
-  elements.mapAttribution.textContent = `${mapLayers[state.basemap].attribution} · 路线轨迹`;
+  elements.mapCaption.textContent = "八线山河艺术总览";
+  elements.mapAttribution.textContent = "静态路线绘图";
 
   document.querySelectorAll("[data-route-id]").forEach((node) => {
     node.classList.toggle("is-active", node.dataset.routeId === selected.id);
@@ -418,7 +409,7 @@ function topicCard(topic, selectedRoute) {
   const cover = document.createElement("img");
   const photo = primaryPhoto(state.pagePhotos, `topic-${topic.id}`);
   if (!setPhotoImage(cover, photo, `${topic.title}专题照片`)) {
-    cover.src = `assets/topic-covers/${topic.id}.svg?v=20260601-flow-6`;
+    cover.src = `assets/topic-covers/${topic.id}.svg?v=20260601-design-2`;
     cover.alt = `${topic.title}封面图`;
   }
   coverLink.append(cover);
@@ -453,7 +444,7 @@ function renderAtlasPhoto() {
   const atlas = document.querySelector(".atlas");
   if (!atlas || !photo) return;
   atlas.classList.add("has-photo");
-  atlas.style.setProperty("--atlas-photo", `url("${photo.file}")`);
+  atlas.style.setProperty("--atlas-photo", `url("${photoUrl(photo)}")`);
 }
 
 function topicRouteButton(routeId) {
@@ -511,7 +502,7 @@ function routeMetaItem(text) {
 }
 
 function routeLogoSrc(route) {
-  return `assets/route-logos/${route.id}.svg?v=20260601-flow-6`;
+  return `assets/route-logos/${route.id}.svg?v=20260601-design-2`;
 }
 
 function routeBadgeImage(route, className = "route-ref-badge") {
@@ -556,25 +547,20 @@ function stopListItem(stop, route) {
 
 function renderMap() {
   const selected = currentRoute();
-  const mapBounds = state.mapMode === "all" ? boundsForRoutes(state.routes) : selected.bounds;
+  const mapBounds = boundsForRoutes(state.routes);
   const viewport = mapViewport(mapBounds);
-  const project = viewport.project;
+  const baseProject = viewport.project;
+  const project = (coordinate) => {
+    const point = baseProject(coordinate);
+    return {
+      x: 500 + (point.x - 500) * 1.18,
+      y: 330 + (point.y - 310) * 1.2
+    };
+  };
 
   elements.routeMap.replaceChildren();
-  elements.routeMap.append(createBackground());
-  elements.routeMap.append(createTileLayer(viewport));
-  elements.routeMap.append(createTileScrim());
-  elements.routeMap.append(createGraticule(project, mapBounds));
-
-  if (state.mapMode === "all") {
-    state.routes.forEach((route) => drawRoute(route, project, false));
-    return;
-  }
-
-  const dimmed = state.routes.filter((route) => route.id !== selected.id);
-  dimmed.forEach((route) => drawRoute(route, project, false));
-  drawRoute(selected, project, true);
-  drawMarkers(selected, project);
+  elements.routeMap.append(createAtlasBackdrop());
+  state.routes.forEach((route) => drawAtlasRoute(route, project, route.id === selected.id));
 }
 
 function createBackground() {
@@ -594,10 +580,11 @@ function createTileLayer(viewport) {
   const source = mapLayers[state.basemap];
   const maxTile = 2 ** viewport.zoom;
   const tileWidth = tileSize * viewport.scale;
-  const minTileX = Math.max(0, Math.floor(viewport.worldLeft / tileSize) - 1);
-  const maxTileX = Math.min(maxTile - 1, Math.floor(viewport.worldRight / tileSize) + 1);
-  const minTileY = Math.max(0, Math.floor(viewport.worldTop / tileSize) - 1);
-  const maxTileY = Math.min(maxTile - 1, Math.floor(viewport.worldBottom / tileSize) + 1);
+  const visibleWorld = visibleWorldBounds(viewport, viewBox.width, viewBox.height);
+  const minTileX = Math.max(0, Math.floor(visibleWorld.left / tileSize) - 1);
+  const maxTileX = Math.min(maxTile - 1, Math.floor(visibleWorld.right / tileSize) + 1);
+  const minTileY = Math.max(0, Math.floor(visibleWorld.top / tileSize) - 1);
+  const maxTileY = Math.min(maxTile - 1, Math.floor(visibleWorld.bottom / tileSize) + 1);
 
   for (let x = minTileX; x <= maxTileX; x += 1) {
     for (let y = minTileY; y <= maxTileY; y += 1) {
@@ -613,6 +600,15 @@ function createTileLayer(viewport) {
   }
 
   return group;
+}
+
+function visibleWorldBounds(viewport, width, height) {
+  return {
+    left: viewport.worldLeft - viewport.offsetX / viewport.scale,
+    top: viewport.worldTop - viewport.offsetY / viewport.scale,
+    right: viewport.worldLeft + (width - viewport.offsetX) / viewport.scale,
+    bottom: viewport.worldTop + (height - viewport.offsetY) / viewport.scale
+  };
 }
 
 function createTileScrim() {
@@ -689,15 +685,111 @@ function drawRoute(route, project, isSelected) {
   elements.routeMap.append(group);
 }
 
+function createAtlasBackdrop() {
+  const group = document.createElementNS(svgNS, "g");
+  group.setAttribute("class", "atlas-art");
+  const rect = document.createElementNS(svgNS, "rect");
+  rect.setAttribute("class", "atlas-art-paper");
+  rect.setAttribute("x", "0");
+  rect.setAttribute("y", "0");
+  rect.setAttribute("width", viewBox.width);
+  rect.setAttribute("height", viewBox.height);
+  group.append(rect);
+
+  [
+    ["M94 462 C184 410 220 354 302 330 C392 304 448 352 540 292 C620 241 698 212 884 226", "atlas-art-wash is-green"],
+    ["M106 202 C198 164 302 182 382 128 C482 61 614 98 724 78 C804 64 860 84 924 48", "atlas-art-wash is-ochre"],
+    ["M154 548 C234 504 346 520 446 464 C550 405 650 456 760 398 C820 366 878 350 942 362", "atlas-art-wash is-blue"]
+  ].forEach(([d, className]) => {
+    const path = document.createElementNS(svgNS, "path");
+    path.setAttribute("class", className);
+    path.setAttribute("d", d);
+    group.append(path);
+  });
+
+  [
+    ["M104 114 C220 82 346 74 492 102 C636 128 778 124 908 90", "atlas-contour"],
+    ["M88 514 C232 482 332 500 454 536 C594 574 738 550 914 516", "atlas-contour"],
+    ["M730 120 C704 210 720 318 674 402 C640 464 652 520 604 588", "atlas-contour is-vertical"]
+  ].forEach(([d, className]) => {
+    const path = document.createElementNS(svgNS, "path");
+    path.setAttribute("class", className);
+    path.setAttribute("d", d);
+    group.append(path);
+  });
+
+  const title = document.createElementNS(svgNS, "text");
+  title.setAttribute("class", "atlas-art-title");
+  title.setAttribute("x", "70");
+  title.setAttribute("y", "96");
+  title.textContent = "八线入图";
+  group.append(title);
+  return group;
+}
+
+function drawAtlasRoute(route, project, isSelected) {
+  const group = document.createElementNS(svgNS, "g");
+  group.setAttribute("class", `atlas-route-group ${isSelected ? "is-selected" : ""}`);
+  group.style.setProperty("--route-color", route.color);
+
+  group.append(routePath(route.geometry.main.coordinates, project, {
+    color: "rgba(36, 34, 31, 0.18)",
+    width: isSelected ? 12 : 9,
+    opacity: 1,
+    isBranch: false,
+    className: "atlas-route-shadow"
+  }));
+
+  group.append(routePath(route.geometry.main.coordinates, project, {
+    color: route.color,
+    width: isSelected ? 7.6 : 5.2,
+    opacity: isSelected ? 0.96 : 0.72,
+    isBranch: false,
+    className: "atlas-route-line"
+  }));
+
+  if (state.showBranch) {
+    group.append(routePath(route.geometry.branch.coordinates, project, {
+      color: route.color,
+      width: isSelected ? 4.8 : 3.4,
+      opacity: isSelected ? 0.74 : 0.48,
+      isBranch: true,
+      className: "atlas-route-branch"
+    }));
+  }
+
+  const hit = hitPath(route.geometry.main.coordinates, project, route.id);
+  group.append(hit);
+  const labelPoint = project(routeLabelCoordinate(route));
+  const label = document.createElementNS(svgNS, "g");
+  label.setAttribute("class", "atlas-route-label");
+  label.setAttribute("transform", `translate(${labelPoint.x.toFixed(1)} ${labelPoint.y.toFixed(1)})`);
+  const circle = document.createElementNS(svgNS, "circle");
+  circle.setAttribute("r", isSelected ? "18" : "14");
+  const number = document.createElementNS(svgNS, "text");
+  number.setAttribute("text-anchor", "middle");
+  number.setAttribute("dy", "0.34em");
+  number.textContent = String(route.order).padStart(2, "0");
+  label.append(circle, number);
+  group.append(label);
+  elements.routeMap.append(group);
+}
+
 function routePath(coordinates, project, options) {
   const path = document.createElementNS(svgNS, "path");
-  path.setAttribute("class", "route-path");
+  path.setAttribute("class", options.className ? `route-path ${options.className}` : "route-path");
   path.setAttribute("d", pathData(coordinates, project));
   path.setAttribute("stroke", options.color);
   path.setAttribute("stroke-width", options.width);
   path.setAttribute("opacity", options.opacity);
   if (options.isBranch) path.setAttribute("stroke-dasharray", "10 10");
   return path;
+}
+
+function routeLabelCoordinate(route) {
+  const coordinates = route.geometry.main.coordinates;
+  const ratio = route.order % 2 ? 0.42 : 0.58;
+  return coordinates[Math.max(0, Math.min(coordinates.length - 1, Math.round((coordinates.length - 1) * ratio)))] ?? coordinates[0];
 }
 
 function hitPath(coordinates, project, routeId) {

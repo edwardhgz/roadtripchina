@@ -8,15 +8,291 @@ const userAgent = "RoadtripChinaPhotoCollector/1.0 (local editorial research)";
 
 const repairs = [
   {
+    pageKey: "index",
+    mode: "replace",
+    index: 2,
+    title: "File:Zhangye Danxia 2016.jpg"
+  },
+  {
+    pageKey: "route-coastal",
+    mode: "replace",
+    index: 1,
+    title: "File:Coast View - panoramio (1).jpg"
+  },
+  {
+    pageKey: "route-coastal",
+    mode: "replace",
+    index: 2,
+    title: "File:Coastal Shot - panoramio.jpg"
+  },
+  {
+    pageKey: "route-yangtze",
+    mode: "replace",
+    index: 1,
+    title: "File:YangtzeCruise.jpg"
+  },
+  {
+    pageKey: "route-yangtze",
+    mode: "replace",
+    index: 2,
+    title: "File:Bridge across the Yangtze - panoramio.jpg"
+  },
+  {
     pageKey: "section-coastal-01",
     mode: "replace",
     index: 1,
     title: "File:Yalu River Broken Bridge 03.jpg"
   },
   {
+    pageKey: "section-silk-canal-02",
+    mode: "replace",
+    index: 1,
+    title: "File:Tarim Desert Highway - Desert poplars, Xinjiang, China.jpg"
+  },
+  {
+    pageKey: "section-silk-canal-05",
+    mode: "replace",
+    index: 2,
+    title: "File:Zhangye Danxia 2016.jpg"
+  },
+  {
     pageKey: "section-silk-canal-06",
     mode: "append",
     title: "File:27407-Luoyang, Longmen Grottoes.jpg"
+  },
+  {
+    pageKey: "section-silk-canal-07",
+    mode: "replace",
+    index: 1,
+    title: "File:Yangzhou - Wanfu Lu area - rural landscape - CIMG3337.JPG"
+  },
+  {
+    pageKey: "section-silk-canal-07",
+    mode: "replace",
+    index: 2,
+    title: "File:Yangzhou - Wanfu Lu area - rural landscape - CIMG3338.JPG"
+  },
+  {
+    pageKey: "section-silk-canal-08",
+    mode: "replace",
+    index: 2,
+    title: "File:Yangzhou - Wanfu Lu area - rural landscape - CIMG3339.JPG"
+  },
+  {
+    pageKey: "section-coastal-02",
+    mode: "replace",
+    index: 1,
+    title: "File:Qingdao Pier.jpg"
+  },
+  {
+    pageKey: "section-coastal-02",
+    mode: "replace",
+    index: 2,
+    title: "File:Dalian Xinghai Bay Bridge.jpg"
+  },
+  {
+    pageKey: "section-coastal-05",
+    mode: "replace",
+    index: 1,
+    title: "File:汕头南澳岛 Nan-Ao Island - panoramio.jpg"
+  },
+  {
+    pageKey: "section-coastal-05",
+    mode: "replace",
+    index: 2,
+    title: "File:Hong Kong–Zhuhai–Macau Bridge 02.jpg"
+  },
+  {
+    pageKey: "section-coastal-06",
+    mode: "replace",
+    index: 1,
+    title: "File:Beihai-Silver-Beach-2007-08-27.jpg"
+  },
+  {
+    pageKey: "section-coastal-06",
+    mode: "replace",
+    index: 2,
+    title: "File:BeiHaiYanTan.jpg"
+  },
+  {
+    pageKey: "section-yangtze-01",
+    mode: "replace",
+    index: 1,
+    title: "File:YangtzeCruise.jpg"
+  },
+  {
+    pageKey: "section-yangtze-02",
+    mode: "replace",
+    index: 1,
+    title: "File:Bridge across the Yangtze - panoramio.jpg"
+  },
+  {
+    pageKey: "section-yangtze-07",
+    mode: "replace",
+    index: 2,
+    title: "File:Beihai-Silver-Beach-2007-08-27.jpg"
+  },
+  {
+    pageKey: "section-yangtze-08",
+    mode: "replace",
+    index: 2,
+    title: "File:YangtzeCruise.jpg"
+  },
+  {
+    pageKey: "section-east-west-01",
+    mode: "replace",
+    index: 1,
+    title: "File:Upper Hunza (Gojal).jpg"
+  },
+  {
+    pageKey: "section-east-west-01",
+    mode: "replace",
+    index: 2,
+    title: "File:The Curves of Silk Route - Karakoram Highway on way to Khunjerab Pass.jpg"
+  },
+  {
+    pageKey: "section-east-west-02",
+    mode: "replace",
+    index: 1,
+    title: "File:Tsaidam1.jpg"
+  },
+  {
+    pageKey: "section-east-west-02",
+    mode: "replace",
+    index: 2,
+    title: "File:柴达木盆地 chaidamu basin - panoramio.jpg"
+  },
+  {
+    pageKey: "section-east-west-04",
+    mode: "replace",
+    index: 1,
+    title: "File:Part of Qinling mountains.jpg"
+  },
+  {
+    pageKey: "section-east-west-04",
+    mode: "replace",
+    index: 2,
+    title: "File:The mountain in Jianmenguan.jpg"
+  },
+  {
+    pageKey: "section-east-west-05",
+    mode: "replace",
+    index: 2,
+    title: "File:Part of Qinling mountains.jpg"
+  },
+  {
+    pageKey: "section-east-west-06",
+    mode: "replace",
+    index: 1,
+    title: "File:Songhua River in Harbin 2.jpg"
+  },
+  {
+    pageKey: "section-east-west-06",
+    mode: "replace",
+    index: 2,
+    title: "File:Frozen Songhua River.jpg"
+  },
+  {
+    pageKey: "section-east-west-08",
+    mode: "replace",
+    index: 2,
+    title: "File:Amur River and Heihe.jpg"
+  },
+  {
+    pageKey: "section-south-north-01",
+    mode: "replace",
+    index: 2,
+    title: "File:Xiaoqikong.JPG"
+  },
+  {
+    pageKey: "section-south-north-02",
+    mode: "replace",
+    index: 1,
+    title: "File:Sunset (256943977).jpeg"
+  },
+  {
+    pageKey: "section-south-north-02",
+    mode: "replace",
+    index: 2,
+    title: "File:Beihai-Silver-Beach-2007-08-27.jpg"
+  },
+  {
+    pageKey: "section-south-north-04",
+    mode: "replace",
+    index: 1,
+    title: "File:Huangshan - Steps to Heaven.jpg"
+  },
+  {
+    pageKey: "section-south-north-04",
+    mode: "replace",
+    index: 2,
+    title: "File:Cliffs of Sanqing Mountain.jpg"
+  },
+  {
+    pageKey: "section-western-vertical-02",
+    mode: "replace",
+    index: 2,
+    title: "File:Meili Snow Mountain, Deqin County, Yunnan.jpg"
+  },
+  {
+    pageKey: "section-western-vertical-03",
+    mode: "replace",
+    index: 1,
+    title: "File:Litang Mountains.jpg"
+  },
+  {
+    pageKey: "section-western-vertical-03",
+    mode: "replace",
+    index: 2,
+    title: "File:Minya Konka Northwest Ridge.JPG"
+  },
+  {
+    pageKey: "section-western-vertical-04",
+    mode: "replace",
+    index: 1,
+    title: "File:Upper Hunza (Gojal).jpg"
+  },
+  {
+    pageKey: "section-western-vertical-04",
+    mode: "replace",
+    index: 2,
+    title: "File:Karakoram Landscapes and scenery.jpg"
+  },
+  {
+    pageKey: "section-western-vertical-06",
+    mode: "replace",
+    index: 2,
+    title: "File:Taklamakan desert.jpg"
+  },
+  {
+    pageKey: "section-western-vertical-08",
+    mode: "replace",
+    index: 1,
+    title: "File:Outlet from Kanas Lake at the Xinjiang Kanas National Geopark.jpg"
+  },
+  {
+    pageKey: "section-western-vertical-08",
+    mode: "replace",
+    index: 2,
+    title: "File:View from the road into Xinjiang Kanas National Geopark.jpg"
+  },
+  {
+    pageKey: "section-central-vertical-03",
+    mode: "replace",
+    index: 1,
+    title: "File:00 Xichang Qionghai Lake.jpg"
+  },
+  {
+    pageKey: "section-central-vertical-03",
+    mode: "replace",
+    index: 2,
+    title: "File:Panoramic view of the confluence of Yalong River & Jinsha River.jpg"
+  },
+  {
+    pageKey: "section-central-vertical-04",
+    mode: "replace",
+    index: 1,
+    title: "File:Litang Mountains.jpg"
   },
   {
     pageKey: "section-south-china-04",
@@ -27,6 +303,84 @@ const repairs = [
     pageKey: "section-south-china-06",
     mode: "append",
     title: "File:Moli Waterfall in Ruili.jpg"
+  },
+  {
+    pageKey: "section-south-china-02",
+    mode: "replace",
+    index: 1,
+    title: "File:Huangshan - Steps to Heaven.jpg"
+  },
+  {
+    pageKey: "topic-tarim-kunlun-oasis",
+    mode: "replace",
+    index: 1,
+    title: "File:Tarim Desert Highway - Desert poplars, Xinjiang, China.jpg"
+  },
+  {
+    pageKey: "topic-tarim-kunlun-oasis",
+    mode: "replace",
+    index: 2,
+    title: "File:Taklamakan desert.jpg"
+  },
+  {
+    pageKey: "topic-hexi-corridor",
+    mode: "replace",
+    index: 1,
+    title: "File:Zhangye Danxia.JPG"
+  },
+  {
+    pageKey: "topic-hexi-corridor",
+    mode: "replace",
+    index: 2,
+    title: "File:Great Wall at Jiayuguan.jpg"
+  },
+  {
+    pageKey: "topic-gannan-gateway",
+    mode: "replace",
+    index: 1,
+    title: "File:Sangke grassland.jpg"
+  },
+  {
+    pageKey: "topic-gannan-gateway",
+    mode: "replace",
+    index: 2,
+    title: "File:甘南藏族自治州Rerdaba grassland - panoramio.jpg"
+  },
+  {
+    pageKey: "topic-western-sichuan-highlands",
+    mode: "replace",
+    index: 1,
+    title: "File:Minya Konka Northwest Ridge.JPG"
+  },
+  {
+    pageKey: "topic-western-sichuan-highlands",
+    mode: "replace",
+    index: 2,
+    title: "File:Litang Mountains.jpg"
+  },
+  {
+    pageKey: "topic-xu-xiake-yunnan",
+    mode: "replace",
+    index: 1,
+    title: "File:Yuanyang sunset rice terraced mountain.jpg"
+  },
+  {
+    pageKey: "topic-xu-xiake-yunnan",
+    mode: "replace",
+    index: 2,
+    title: "File:Erhai Lake Dali 01.JPG"
+  },
+  {
+    pageKey: "topic-northern-xinjiang",
+    mode: "replace",
+    index: 1,
+    title: "File:LakeKanas2.jpg"
+  },
+  {
+    pageKey: "topic-northern-xinjiang",
+    mode: "replace",
+    index: 2,
+    title: "File:喀纳斯湖Q30028182.jpg"
   }
 ];
 
@@ -65,6 +419,7 @@ for (const repair of repairs) {
   }
   page.status = page.photos.length >= manifest.photosPerPage ? "ok" : page.photos.length ? "partial" : "missing";
   console.log(`${repair.mode.toUpperCase()} ${page.key}/${String(index).padStart(2, "0")} ${photo.title}`);
+  await sleep(350);
 }
 
 manifest.generatedAt = new Date().toISOString();
@@ -83,7 +438,7 @@ async function commonsFile(title) {
     iiurlwidth: String(thumbWidth),
     origin: "*"
   });
-  const response = await fetch(`https://commons.wikimedia.org/w/api.php?${params}`, {
+  const response = await retryFetch(`https://commons.wikimedia.org/w/api.php?${params}`, {
     headers: { "user-agent": userAgent }
   });
   if (!response.ok) throw new Error(`Commons API ${response.status} for ${title}`);

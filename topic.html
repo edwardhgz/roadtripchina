@@ -8,7 +8,7 @@
       name="description"
       content="行车中国特别专题文章，沿多条路线的局部读出一片连续地理。"
     >
-    <link rel="stylesheet" href="styles.css?v=20260601-photos-1">
+    <link rel="stylesheet" href="styles.css?v=20260601-design-2">
   </head>
   <body>
     <header class="site-header">
@@ -28,19 +28,26 @@
 
     <main class="topic-page">
       <section class="topic-map-section" aria-label="专题地图">
-        <div class="route-map-shell">
-          <div class="map-panel topic-map-panel">
-            <div class="map-toolbar" aria-label="专题地图视图">
-              <button class="tool-button" id="topicMapZoomOut" type="button" title="缩小地图">−</button>
-              <button class="tool-button" id="topicMapZoomIn" type="button" title="放大地图">＋</button>
-              <button class="tool-button is-active" id="topicBasemapAdmin" type="button" title="显示行政区划图">区划</button>
-              <button class="tool-button" id="topicBasemapSatellite" type="button" title="显示卫星图">卫星</button>
+        <div class="route-map-shell topic-map-shell">
+          <div class="topic-map-left">
+            <div class="map-panel topic-map-panel">
+              <div class="map-toolbar" aria-label="专题地图视图">
+                <button class="tool-button" id="topicMapZoomOut" type="button" title="缩小地图">−</button>
+                <button class="tool-button" id="topicMapZoomIn" type="button" title="放大地图">＋</button>
+                <button class="tool-button is-active" id="topicBasemapAdmin" type="button" title="显示行政区划图">区划</button>
+                <button class="tool-button" id="topicBasemapSatellite" type="button" title="显示卫星图">卫星</button>
+              </div>
+              <svg id="topicMap" role="img" aria-label="专题片段拼接地图" viewBox="0 0 1000 620"></svg>
+              <div class="map-caption">
+                <span id="topicMapCaption"></span>
+                <span id="topicMapAttribution"></span>
+              </div>
             </div>
-            <svg id="topicMap" role="img" aria-label="专题片段拼接地图" viewBox="0 0 1000 620"></svg>
-            <div class="map-caption">
-              <span id="topicMapCaption"></span>
-              <span id="topicMapAttribution"></span>
-            </div>
+            <section class="topic-map-notes">
+              <h2>专题地图</h2>
+              <p id="topicMapSummary"></p>
+              <div class="topic-map-legend" id="topicMapLegend"></div>
+            </section>
           </div>
           <aside class="route-map-summary">
             <p class="eyebrow" id="topicMapKicker">专题地图</p>
@@ -53,9 +60,6 @@
                 <a id="topicMapPhotoCredit" href="#" rel="noreferrer" target="_blank"></a>
               </figcaption>
             </figure>
-            <h2>专题地图</h2>
-            <p id="topicMapSummary"></p>
-            <div class="topic-map-legend" id="topicMapLegend"></div>
           </aside>
         </div>
       </section>
@@ -118,6 +122,6 @@
       <span>愿每一片专题，都像从总图上放大的一页山河。</span>
     </footer>
 
-    <script src="topic.js?v=20260601-photos-1" type="module"></script>
+    <script src="topic.js?v=20260601-design-2" type="module"></script>
   </body>
 </html>

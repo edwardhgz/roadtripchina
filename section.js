@@ -1,4 +1,4 @@
-import { alternatePhoto, loadPagePhotos, primaryPhoto, setPhotoCredit, setPhotoImage } from "./page-photos.js?v=20260601-photos-1";
+import { alternatePhoto, loadPagePhotos, primaryPhoto, setPhotoCredit, setPhotoImage } from "./page-photos.js?v=20260601-design-2";
 
 const svgNS = "http://www.w3.org/2000/svg";
 const tileSize = 256;
@@ -74,9 +74,9 @@ attachMapDrag(elements.sectionOverviewMap, {
 async function init() {
   try {
     const [routeResponse, articleResponse, detailResponse, photoPages] = await Promise.all([
-      fetch("./data/routes.json?v=20260601-flow-6"),
-      fetch("./data/route-articles.json?v=20260601-flow-6"),
-      fetch("./data/section-details.json?v=20260601-flow-6"),
+      fetch("./data/routes.json?v=20260601-design-2"),
+      fetch("./data/route-articles.json?v=20260601-design-2"),
+      fetch("./data/section-details.json?v=20260601-design-2"),
       loadPagePhotos()
     ]);
     const data = await routeResponse.json();
@@ -141,7 +141,7 @@ function renderImage(route, detail, index) {
 
   const image = detail
     ? {
-        url: `assets/section-images/${route.id}-${String(index + 1).padStart(2, "0")}.svg?v=20260601-flow-6`,
+        url: `assets/section-images/${route.id}-${String(index + 1).padStart(2, "0")}.svg?v=20260601-design-2`,
         alt: `${route.title}：${detail.imageCaption}`,
         caption: detail.imageCaption,
         credit: "行车中国分段视觉",
@@ -306,10 +306,11 @@ function createMiniTileLayer(viewport) {
   const source = mapLayers.admin;
   const maxTile = 2 ** viewport.zoom;
   const tileWidth = tileSize * viewport.scale;
-  const minTileX = Math.max(0, Math.floor(viewport.worldLeft / tileSize) - 1);
-  const maxTileX = Math.min(maxTile - 1, Math.floor(viewport.worldRight / tileSize) + 1);
-  const minTileY = Math.max(0, Math.floor(viewport.worldTop / tileSize) - 1);
-  const maxTileY = Math.min(maxTile - 1, Math.floor(viewport.worldBottom / tileSize) + 1);
+  const visibleWorld = visibleWorldBounds(viewport, miniViewBox.width, miniViewBox.height);
+  const minTileX = Math.max(0, Math.floor(visibleWorld.left / tileSize) - 1);
+  const maxTileX = Math.min(maxTile - 1, Math.floor(visibleWorld.right / tileSize) + 1);
+  const minTileY = Math.max(0, Math.floor(visibleWorld.top / tileSize) - 1);
+  const maxTileY = Math.min(maxTile - 1, Math.floor(visibleWorld.bottom / tileSize) + 1);
 
   for (let x = minTileX; x <= maxTileX; x += 1) {
     for (let y = minTileY; y <= maxTileY; y += 1) {
@@ -325,6 +326,15 @@ function createMiniTileLayer(viewport) {
   }
 
   return group;
+}
+
+function visibleWorldBounds(viewport, width, height) {
+  return {
+    left: viewport.worldLeft - viewport.offsetX / viewport.scale,
+    top: viewport.worldTop - viewport.offsetY / viewport.scale,
+    right: viewport.worldLeft + (width - viewport.offsetX) / viewport.scale,
+    bottom: viewport.worldTop + (height - viewport.offsetY) / viewport.scale
+  };
 }
 
 function segmentTrace(route, segment, index) {

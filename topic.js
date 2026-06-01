@@ -1,4 +1,4 @@
-import { alternatePhoto, loadPagePhotos, primaryPhoto, setPhotoCredit, setPhotoImage } from "./page-photos.js?v=20260601-photos-1";
+import { alternatePhoto, loadPagePhotos, primaryPhoto, setPhotoCredit, setPhotoImage } from "./page-photos.js?v=20260601-design-2";
 
 const svgNS = "http://www.w3.org/2000/svg";
 const tileSize = 256;
@@ -92,9 +92,9 @@ attachMapDrag(elements.topicMap, {
 async function init() {
   try {
     const [routeResponse, topicResponse, articleResponse, photoPages] = await Promise.all([
-      fetch("./data/routes.json?v=20260601-flow-6"),
-      fetch("./data/special-topics.json?v=20260601-flow-6"),
-      fetch("./data/topic-articles.json?v=20260601-flow-6"),
+      fetch("./data/routes.json?v=20260601-design-2"),
+      fetch("./data/special-topics.json?v=20260601-design-2"),
+      fetch("./data/topic-articles.json?v=20260601-design-2"),
       loadPagePhotos()
     ]);
     const routeData = await routeResponse.json();
@@ -157,7 +157,7 @@ function renderTopicCover(topic, article) {
     return;
   }
 
-  elements.topicCover.src = `assets/topic-covers/${topic.id}.svg?v=20260601-flow-6`;
+  elements.topicCover.src = `assets/topic-covers/${topic.id}.svg?v=20260601-design-2`;
   elements.topicCover.alt = `${topic.title}封面图`;
   elements.topicCoverCaption.textContent = article?.caption ?? topic.deck;
   elements.topicCoverCredit.hidden = true;
@@ -463,10 +463,11 @@ function createTileLayer(viewport) {
   const source = mapLayers[state.basemap];
   const maxTile = 2 ** viewport.zoom;
   const tileWidth = tileSize * viewport.scale;
-  const minTileX = Math.max(0, Math.floor(viewport.worldLeft / tileSize) - 1);
-  const maxTileX = Math.min(maxTile - 1, Math.floor(viewport.worldRight / tileSize) + 1);
-  const minTileY = Math.max(0, Math.floor(viewport.worldTop / tileSize) - 1);
-  const maxTileY = Math.min(maxTile - 1, Math.floor(viewport.worldBottom / tileSize) + 1);
+  const visibleWorld = visibleWorldBounds(viewport, viewBox.width, viewBox.height);
+  const minTileX = Math.max(0, Math.floor(visibleWorld.left / tileSize) - 1);
+  const maxTileX = Math.min(maxTile - 1, Math.floor(visibleWorld.right / tileSize) + 1);
+  const minTileY = Math.max(0, Math.floor(visibleWorld.top / tileSize) - 1);
+  const maxTileY = Math.min(maxTile - 1, Math.floor(visibleWorld.bottom / tileSize) + 1);
 
   for (let x = minTileX; x <= maxTileX; x += 1) {
     for (let y = minTileY; y <= maxTileY; y += 1) {
@@ -482,6 +483,15 @@ function createTileLayer(viewport) {
   }
 
   return group;
+}
+
+function visibleWorldBounds(viewport, width, height) {
+  return {
+    left: viewport.worldLeft - viewport.offsetX / viewport.scale,
+    top: viewport.worldTop - viewport.offsetY / viewport.scale,
+    right: viewport.worldLeft + (width - viewport.offsetX) / viewport.scale,
+    bottom: viewport.worldTop + (height - viewport.offsetY) / viewport.scale
+  };
 }
 
 function createTileScrim() {
@@ -616,7 +626,7 @@ function clamp(value, min, max) {
 }
 
 function routeLogoSrc(route) {
-  return `assets/route-logos/${route.id}.svg?v=20260601-flow-6`;
+  return `assets/route-logos/${route.id}.svg?v=20260601-design-2`;
 }
 
 function routeBadgeImage(route, className = "route-ref-badge") {
