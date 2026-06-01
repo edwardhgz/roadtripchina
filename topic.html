@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>专题文章 | 行车中国</title>
+    <meta
+      name="description"
+      content="行车中国特别专题文章，沿多条路线的局部读出一片连续地理。"
+    >
+    <link rel="stylesheet" href="styles.css?v=20260601-side-panel-flow-2">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html#top" aria-label="行车中国首页">
+        <span class="brand-mark">行</span>
+        <span>
+          <strong>行车中国</strong>
+          <small>公路旅行志</small>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="index.html#top">总览地图</a>
+        <a href="index.html#routes">八条线路</a>
+        <a href="index.html#topics">特别专题</a>
+      </nav>
+    </header>
+
+    <main class="topic-page">
+      <section class="topic-hero">
+        <div class="topic-hero-copy">
+          <a class="back-link" href="index.html#topics">返回特别专题</a>
+          <p class="eyebrow" id="topicKicker">专题文章</p>
+          <h1 id="topicTitle">专题文章</h1>
+          <p class="lede" id="topicDeck"></p>
+          <div class="fact-row" id="topicFacts"></div>
+        </div>
+        <figure class="topic-cover-image">
+          <img id="topicCover" alt="">
+          <figcaption id="topicCoverCaption"></figcaption>
+        </figure>
+      </section>
+
+      <section class="topic-map-section" aria-label="专题地图">
+        <div class="route-map-shell">
+          <div class="map-panel topic-map-panel">
+            <div class="map-toolbar" aria-label="专题地图视图">
+              <button class="tool-button" id="topicMapZoomOut" type="button" title="缩小地图">−</button>
+              <button class="tool-button" id="topicMapZoomIn" type="button" title="放大地图">＋</button>
+              <button class="tool-button is-active" id="topicBasemapAdmin" type="button" title="显示行政区划图">区划</button>
+              <button class="tool-button" id="topicBasemapSatellite" type="button" title="显示卫星图">卫星</button>
+            </div>
+            <svg id="topicMap" role="img" aria-label="专题片段拼接地图" viewBox="0 0 1000 620"></svg>
+            <div class="map-caption">
+              <span id="topicMapCaption"></span>
+              <span id="topicMapAttribution"></span>
+            </div>
+          </div>
+          <aside class="route-map-summary">
+            <h2>专题地图</h2>
+            <p id="topicMapSummary"></p>
+            <div class="topic-map-legend" id="topicMapLegend"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="topic-article-grid">
+        <article class="topic-body" id="topicBody"></article>
+        <aside class="topic-side-panel">
+          <div>
+            <h2>相关路线</h2>
+            <div class="topic-side-routes" id="topicRoutes"></div>
+          </div>
+          <div>
+            <h2>专题片段</h2>
+            <div class="topic-side-fragments" id="topicFragments"></div>
+          </div>
+          <div>
+            <h2>交汇线索</h2>
+            <p id="topicCrossing"></p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>行车中国，中文公路旅行线路志。</span>
+      <span>愿每一片专题，都像从总图上放大的一页山河。</span>
+    </footer>
+
+    <script src="topic.js?v=20260601-research" type="module"></script>
+  </body>
+</html>

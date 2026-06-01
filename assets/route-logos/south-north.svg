@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 128" role="img" aria-labelledby="title desc">
+  <title id="title">南北极路线签牌</title>
+  <desc id="desc">行车中国第5条路线：中国南北极之路。</desc>
+  <defs>
+    
+    <linearGradient id="paper" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fffaf0"/>
+      <stop offset="0.48" stop-color="#f5e5db"/>
+      <stop offset="1" stop-color="#e0c1ad"/>
+    </linearGradient>
+    <filter id="paperGrain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence baseFrequency="0.74" numOctaves="2" seed="93" type="fractalNoise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.13"/>
+      </feComponentTransfer>
+    </filter>
+    <filter id="assetShadow" x="-18%" y="-18%" width="136%" height="136%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#2f261a" flood-opacity="0.16"/>
+    </filter>
+    <linearGradient id="paperClean" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fffaf0"/>
+      <stop offset="1" stop-color="#f7ebe0"/>
+    </linearGradient>
+  </defs>
+  <rect x="5" y="5" width="350" height="118" rx="21" fill="url(#paperClean)" filter="url(#assetShadow)"/>
+  <rect x="8.5" y="8.5" width="343" height="111" rx="18" fill="none" stroke="#b54646" stroke-width="5"/>
+  <rect x="20" y="20" width="76" height="76" rx="16" fill="#b54646"/>
+  <rect x="29" y="29" width="58" height="58" rx="11" fill="none" stroke="#fffaf0" stroke-width="3.2" opacity="0.78"/>
+  <text x="58" y="69" text-anchor="middle" fill="#fffaf0" font-family="'Kaiti SC','STKaiti','FZKai-Z03S','KaiTi','Songti SC','STSong','Noto Serif CJK SC',serif" font-size="42" font-weight="900">纵</text>
+  <text x="112" y="52" fill="#20231f" font-family="'Songti SC','STSong','Source Han Serif SC','Noto Serif CJK SC','SimSun',serif" font-size="35" font-weight="900">南北极</text>
+  <path d="M113 77H244" fill="none" stroke="#b54646" stroke-width="6" stroke-linecap="round"/>
+  <text x="303" y="83" text-anchor="middle" fill="#b54646" font-family="'Avenir Next',Avenir,Arial,sans-serif" font-size="24" font-weight="900" letter-spacing="1.2">05</text>
+  <text x="113" y="101" fill="#20231f" fill-opacity="0.58" font-family="'PingFang SC','Hiragino Sans GB','Noto Sans CJK SC','Microsoft YaHei',Arial,sans-serif" font-size="13" font-weight="900">从热带海风到北国寒林</text>
+  <rect width="360" height="128" fill="#3b3020" filter="url(#paperGrain)" opacity="0.16"/>
+</svg>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>行车中国 | 中国公路旅行线路</title>
+    <meta
+      name="description"
+      content="行车中国是一份中文公路旅行灵感地图，收录八条中国主题路线及其主线、支线。"
+    >
+    <link rel="stylesheet" href="styles.css?v=20260601-side-panel-flow-2">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="行车中国首页">
+        <span class="brand-mark">行</span>
+        <span>
+          <strong>行车中国</strong>
+          <small>公路旅行志</small>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="#top">总览地图</a>
+        <a href="#routes">八条线路</a>
+        <a href="#topics">特别专题</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="atlas">
+        <div class="atlas-copy">
+          <p class="eyebrow">中国公路旅行灵感地图</p>
+          <h1>摊开一张中国地图，八条公路像山河的纹路。</h1>
+          <p class="lede">
+            先看全局：八条路线同时铺开；再进入单线，读它的主线、支线、分段和沿途城镇。
+          </p>
+          <div class="stats-strip" aria-label="路线统计">
+            <span><strong id="routeCount">8</strong> 条路线</span>
+            <span><strong id="totalDistance">-</strong> 公里</span>
+            <span><strong>主线和支线</strong></span>
+          </div>
+          <div class="route-pills" id="routePills" aria-label="路线选择"></div>
+        </div>
+
+        <div class="map-panel" aria-label="路线地图">
+          <div class="map-toolbar" aria-label="地图视图">
+            <button class="tool-button" id="fitSelected" type="button" title="查看当前线路">本线</button>
+            <button class="tool-button is-active" id="fitAll" type="button" title="查看全部线路">全图</button>
+            <button class="tool-button is-active" id="toggleBranch" type="button" title="显示或隐藏支线">支线</button>
+            <button class="tool-button" id="mapZoomOut" type="button" title="缩小地图">−</button>
+            <button class="tool-button" id="mapZoomIn" type="button" title="放大地图">＋</button>
+            <button class="tool-button is-active" id="basemapAdmin" type="button" title="显示行政区划图">区划</button>
+            <button class="tool-button" id="basemapSatellite" type="button" title="显示卫星图">卫星</button>
+          </div>
+          <svg id="routeMap" role="img" aria-label="八条中国公路旅行线路图" viewBox="0 0 1000 620"></svg>
+          <div class="map-caption">
+            <span id="mapCaption">八条线路全图</span>
+            <span id="mapAttribution">路线轨迹</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="route-board" id="routes">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">八线入图</p>
+            <h2>八条路线</h2>
+          </div>
+          <p class="section-intro">先选择方向，再进入单条路线，沿分段文章慢慢读下去。</p>
+        </div>
+        <div class="route-grid" id="routeCards"></div>
+      </section>
+
+      <section class="topic-section" id="topics">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">专题成卷</p>
+            <h2>特别专题</h2>
+          </div>
+          <p class="section-intro">专题会把多条路线的局部收拢成一片连续地理，像从总图上放大的一页。</p>
+        </div>
+        <div class="topic-grid" id="specialTopics"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>行车中国，中文公路旅行线路志。</span>
+      <span>路线依原始轨迹转绘，图片为风格化视觉素材。</span>
+    </footer>
+
+    <script src="app.js?v=20260601-research" type="module"></script>
+  </body>
+</html>

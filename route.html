@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>路线主页 | 行车中国</title>
+    <meta
+      name="description"
+      content="行车中国单条路线文章，展示路线地图、道路骨架、地理板块、分段入口和相关专题。"
+    >
+    <link rel="stylesheet" href="styles.css?v=20260601-side-panel-flow-2">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html#top" aria-label="行车中国首页">
+        <span class="brand-mark">行</span>
+        <span>
+          <strong>行车中国</strong>
+          <small>公路旅行志</small>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="index.html#top">总览地图</a>
+        <a href="index.html#routes">八条线路</a>
+        <a href="index.html#topics">特别专题</a>
+      </nav>
+    </header>
+
+    <main class="route-page">
+      <section class="route-hero">
+        <figure class="route-home-logo">
+          <img id="routeLogo" alt="">
+        </figure>
+        <div class="route-home-copy">
+          <a class="back-link" href="index.html#routes">返回八条线路</a>
+          <p class="eyebrow" id="routeKicker">路线主页</p>
+          <h1 id="routeTitle">路线主页</h1>
+          <p class="lede" id="routeDeck"></p>
+          <div class="route-home-meta" id="routeMeta" aria-label="路线基本信息"></div>
+          <div class="route-home-actions">
+            <a class="route-action is-primary" id="firstSectionLink" href="#">进入第一段</a>
+            <a class="route-action" href="#segments">查看分段</a>
+            <a class="route-action" href="#relatedTopics">相关专题</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="route-article-section" id="routeArticleSection">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">路线长文</p>
+            <h2 id="routeArticleTitle">沿线风土与历史地理</h2>
+          </div>
+        </div>
+        <article class="route-article-body" id="routeArticleBody"></article>
+      </section>
+
+      <section class="route-map-section" aria-label="路线地图">
+        <div class="route-map-shell">
+          <div class="map-panel route-map-panel">
+            <div class="map-toolbar" aria-label="地图视图">
+              <button class="tool-button is-active" id="routeToggleBranch" type="button" title="显示或隐藏支线">支线</button>
+              <button class="tool-button" id="routeMapZoomOut" type="button" title="缩小地图">−</button>
+              <button class="tool-button" id="routeMapZoomIn" type="button" title="放大地图">＋</button>
+              <button class="tool-button is-active" id="routeBasemapAdmin" type="button" title="显示行政区划图">区划</button>
+              <button class="tool-button" id="routeBasemapSatellite" type="button" title="显示卫星图">卫星</button>
+            </div>
+            <svg id="routeDetailMap" role="img" aria-label="当前路线地图" viewBox="0 0 1000 620"></svg>
+            <div class="map-caption">
+              <span id="routeMapCaption"></span>
+              <span id="routeMapAttribution"></span>
+            </div>
+          </div>
+          <aside class="route-map-summary">
+            <h2>路线开合</h2>
+            <p id="terminalArc"></p>
+            <dl class="line-list">
+              <div>
+                <dt>主线</dt>
+                <dd id="mainLabel"></dd>
+              </div>
+              <div>
+                <dt>支线</dt>
+                <dd id="branchLabel"></dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="route-overview-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">读线方式</p>
+            <h2>这条线怎么读</h2>
+          </div>
+          <p class="section-intro" id="routeOverview"></p>
+        </div>
+        <div class="route-anatomy-grid">
+          <article>
+            <h3>道路骨架</h3>
+            <p id="roadSpineSummary"></p>
+            <div class="road-spine-groups compact">
+              <div>
+                <h4>国道与主干</h4>
+                <div class="road-chip-grid" id="primaryRoads"></div>
+              </div>
+              <div>
+                <h4>高速与奇观</h4>
+                <div class="road-chip-grid" id="expresswayRoads"></div>
+              </div>
+            </div>
+            <p class="road-note" id="localRoadNote"></p>
+          </article>
+          <article>
+            <h3>起点、终点与交汇</h3>
+            <div class="terminal-grid vertical">
+              <div>
+                <span>起点</span>
+                <p id="terminalStart"></p>
+              </div>
+              <div>
+                <span>终点</span>
+                <p id="terminalEnd"></p>
+              </div>
+              <div>
+                <span>支线</span>
+                <p id="terminalBranch"></p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="route-block-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">山河板块</p>
+            <h2>地理与文化板块</h2>
+          </div>
+        </div>
+        <div class="geo-blocks" id="geoBlocks"></div>
+      </section>
+
+      <section class="segment-section" id="segments">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">分段行程</p>
+            <h2 id="segmentTitle">路线分段</h2>
+          </div>
+          <p class="section-intro">每个分段都展开更细的节点、节奏和位置关系。</p>
+        </div>
+        <div class="segments" id="segmentsList"></div>
+      </section>
+
+      <section class="route-block-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">交汇节点</p>
+            <h2>线路交汇点</h2>
+          </div>
+        </div>
+        <div class="crossing-list" id="crossingsList"></div>
+      </section>
+
+      <section class="topic-section" id="relatedTopics">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">相关专题</p>
+            <h2>相关专题</h2>
+          </div>
+          <p class="section-intro">专题会把本路线的局部与其他路线重新组合，读出一片连续地理。</p>
+        </div>
+        <div class="topic-grid" id="relatedTopicGrid"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>行车中国，中文公路旅行线路志。</span>
+      <span>路线、分段与专题，共同组成这本公路旅行地图册。</span>
+    </footer>
+
+    <script src="route.js?v=20260601-research" type="module"></script>
+  </body>
+</html>

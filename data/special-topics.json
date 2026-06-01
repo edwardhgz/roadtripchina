@@ -1,0 +1,323 @@
+{
+  "topics": [
+    {
+      "id": "northern-xinjiang",
+      "title": "北疆：天山北坡与阿勒泰",
+      "kicker": "伊犁、赛里木湖、独山子、阿勒泰、喀纳斯",
+      "deck": "天山北坡、伊犁河谷、赛里木湖、塔城、阿勒泰和喀纳斯共同构成一块冷亮而湿润的新疆。这里的主题不是辽阔本身，而是西风水汽、山前绿洲、口岸城市、林带与牧道怎样彼此接续。",
+      "routeIds": [
+        "silk-canal",
+        "western-vertical"
+      ],
+      "crossing": "这一专题的意义，是把北疆从宏大的新疆背景中放大出来。它既属于丝路的旁章，也属于西部纵贯的北端收束；两条路线在这里互相补面，让天山北侧、伊犁、塔城、阿勒泰不再只是地图上的远名。",
+      "fragments": [
+        {
+          "route": "silk-canal",
+          "segment": 2,
+          "range": "伊宁 - 赛里木湖 - 独山子",
+          "label": "伊犁与赛里木湖",
+          "role": "草原、湖泊和天山山口构成北疆南缘"
+        },
+        {
+          "route": "silk-canal",
+          "segment": 8,
+          "range": "乌鲁木齐 - 阿勒泰 - 喀纳斯",
+          "label": "北疆支线",
+          "role": "阿勒泰与喀纳斯把森林湖泊接入丝路旁章"
+        },
+        {
+          "route": "western-vertical",
+          "segment": 6,
+          "range": "库车 - 独山子 - 克拉玛依 - 喀纳斯",
+          "label": "独库北上与阿勒泰",
+          "role": "独库北上后，天山南北转换成阿尔泰山地"
+        },
+        {
+          "route": "western-vertical",
+          "segment": 7,
+          "range": "塔城 - 赛里木湖 - 霍尔果斯",
+          "label": "天山西段支线",
+          "role": "塔城、赛湖和口岸让北疆西口显出边境尺度"
+        }
+      ]
+    },
+    {
+      "id": "tarim-kunlun-oasis",
+      "title": "南疆：塔里木绿洲与昆仑边缘",
+      "kicker": "喀什、叶城、和田、库车、库尔勒",
+      "deck": "喀什、叶城、和田、库车、库尔勒并不是沙漠旁的孤点，而是帕米尔、昆仑、天山雪水在塔里木盆地边缘留下的城市弧线。",
+      "routeIds": [
+        "silk-canal",
+        "east-west",
+        "western-vertical"
+      ],
+      "crossing": "南疆专题把盆地南北两侧放在一起看，便能读出绿洲文明的结构：山地给水，水养城，城连道路，道路又让荒漠边缘成为跨区域往来的通道。",
+      "fragments": [
+        {
+          "route": "silk-canal",
+          "segment": 0,
+          "range": "红其拉甫 / 塔什库尔干 - 喀什",
+          "label": "帕米尔与喀什",
+          "role": "从帕米尔山口下降到喀什绿洲"
+        },
+        {
+          "route": "silk-canal",
+          "segment": 1,
+          "range": "喀什 - 阿克苏 - 库车 - 库尔勒",
+          "label": "塔里木北缘",
+          "role": "龟兹、胡杨和塔里木北缘古道"
+        },
+        {
+          "route": "east-west",
+          "segment": 0,
+          "range": "喀什 - 叶城 - 和田",
+          "label": "昆仑北麓",
+          "role": "昆仑山前的绿洲南缘"
+        },
+        {
+          "route": "western-vertical",
+          "segment": 5,
+          "range": "和田 - 库车",
+          "label": "南疆北上",
+          "role": "从阿里高原落入南疆，再向库车北上"
+        }
+      ]
+    },
+    {
+      "id": "hexi-corridor",
+      "title": "河西走廊：祁连山北麓",
+      "kicker": "敦煌、嘉峪关、张掖、酒泉、兰州",
+      "deck": "敦煌、嘉峪关、张掖、酒泉、武威、兰州沿祁连山北麓排开，石窟、关城、绿洲、长城和黄河共同说明：河西走廊不是一条过境线，而是一套由雪水维持的文明通道。",
+      "routeIds": [
+        "silk-canal",
+        "central-vertical",
+        "east-west"
+      ],
+      "crossing": "把河西放到全站的路线网络里，它不只是丝路运河的中段，也是中部纵贯和东西极之路进入西北时必须理解的山前舞台。",
+      "fragments": [
+        {
+          "route": "silk-canal",
+          "segment": 4,
+          "range": "哈密 - 敦煌 - 嘉峪关 - 张掖 - 武威 - 兰州",
+          "label": "河西走廊",
+          "role": "丝路城市、关城、绿洲和黄河转场"
+        },
+        {
+          "route": "central-vertical",
+          "segment": 5,
+          "range": "张掖 - 酒泉 - 嘉峪关",
+          "label": "祁连山北麓",
+          "role": "从青海翻入河西后的祁连山北麓"
+        },
+        {
+          "route": "east-west",
+          "segment": 2,
+          "range": "德令哈 - 西宁",
+          "label": "青海西口",
+          "role": "柴达木和青海方向靠近河西南缘"
+        }
+      ]
+    },
+    {
+      "id": "gannan-gateway",
+      "title": "甘南：进入高原前的门廊",
+      "kicker": "夏河、甘南、久治、若尔盖、西宁",
+      "deck": "夏河、拉卜楞寺、大夏河、合作、玛曲、若尔盖、久治和西宁之间，高原并非突然降临，而是通过草地、寺院、河源湿地和河湟谷地缓缓显形。",
+      "routeIds": [
+        "east-west",
+        "central-vertical"
+      ],
+      "crossing": "专题把这块区域单独放大，是为了让路线不再只是经过夏河或若尔盖，而能看见高原东北缘如何由寺院、草原、河流和道路共同组成。",
+      "fragments": [
+        {
+          "route": "east-west",
+          "segment": 2,
+          "range": "西宁 - 夏河 - 若尔盖",
+          "label": "夏河与若尔盖",
+          "role": "青甘高地与草原寺院的横向通道"
+        },
+        {
+          "route": "central-vertical",
+          "segment": 3,
+          "range": "久治 - 甘南 - 夏河",
+          "label": "甘南高原边缘",
+          "role": "久治、甘南、夏河构成高原门廊"
+        },
+        {
+          "route": "central-vertical",
+          "segment": 4,
+          "range": "夏河 - 西宁",
+          "label": "青海门户",
+          "role": "西宁与河湟谷地承接甘南北缘"
+        }
+      ]
+    },
+    {
+      "id": "western-sichuan-highlands",
+      "title": "川西：康定、理塘与岷江大渡河",
+      "kicker": "乐山、雅安、康定、理塘、都江堰",
+      "deck": "乐山、雅安、泸定、康定、新都桥、理塘、稻城与岷江大渡河之间，川西不是单纯的雪山风景，而是四川盆地西缘、茶马古道、山口、藏区城镇和高原草地的连续抬升。",
+      "routeIds": [
+        "central-vertical",
+        "yangtze",
+        "east-west"
+      ],
+      "crossing": "当路线继续通往理塘、稻城、德钦或藏东，川西已经完成它的工作：让人的身体和目光逐渐适应更高、更冷、更辽阔的山地。",
+      "fragments": [
+        {
+          "route": "central-vertical",
+          "segment": 6,
+          "range": "乐山 - 雅安 - 康定 - 理塘",
+          "label": "川西支线",
+          "role": "盆地西缘、雨城和折多山口"
+        },
+        {
+          "route": "yangtze",
+          "segment": 4,
+          "range": "宜宾 - 乐山 - 都江堰",
+          "label": "巴蜀西缘",
+          "role": "巴蜀水系与川西山地的温和入口"
+        },
+        {
+          "route": "east-west",
+          "segment": 3,
+          "range": "若尔盖 - 广元",
+          "label": "川北边缘",
+          "role": "横断山前缘与高原城镇相互照面"
+        }
+      ]
+    },
+    {
+      "id": "taihang-eight-passes",
+      "title": "太行山：八陉古道与山西东缘",
+      "kicker": "洛阳、三门峡、运城、太原、北京",
+      "deck": "轵关陉、太行陉、白陉、滏口陉、井陉、飞狐陉、蒲阴陉、军都陉把太行山切成一组古老通道。它们连接洛阳、三门峡、晋南、太原、北京与京西山地，也把现代路线送回古道的骨架里。",
+      "routeIds": [
+        "south-north",
+        "silk-canal",
+        "east-west"
+      ],
+      "crossing": "这个专题把八陉重新放回路线网络，是为了让驾驶者明白，自己经过的并非普通山路，而是中国北方长期依赖的山地通道体系。",
+      "fragments": [
+        {
+          "route": "silk-canal",
+          "segment": 5,
+          "range": "西安 - 华山 - 洛阳",
+          "label": "洛阳与南太行入口",
+          "role": "三门峡、晋南和太原连接太行西侧"
+        },
+        {
+          "route": "south-north",
+          "segment": 3,
+          "range": "三门峡 - 运城 - 临汾 - 平遥 - 太原",
+          "label": "晋南到太原",
+          "role": "华北北缘与军都陉方向的山地门户"
+        },
+        {
+          "route": "south-north",
+          "segment": 4,
+          "range": "太原 - 北京",
+          "label": "井陉与军都方向",
+          "role": "洛阳、三门峡附近接入太行南口"
+        },
+        {
+          "route": "east-west",
+          "segment": 4,
+          "range": "包头 - 北京",
+          "label": "华北北缘",
+          "role": "靠近军都陉、京西山地和华北边缘"
+        }
+      ]
+    },
+    {
+      "id": "xu-xiake-guangxi",
+      "title": "徐霞客的广西足迹",
+      "kicker": "桂林、阳朔、柳州、荔波、南宁、百色",
+      "deck": "桂林、阳朔、柳州、桂中、桂西和南丹之间，徐霞客关心的不只是山水画面，而是峰林、洞穴、伏流、江河和驿路如何组成一套喀斯特地理。",
+      "routeIds": [
+        "south-china",
+        "central-vertical",
+        "south-north"
+      ],
+      "crossing": "因此，徐霞客广西足迹的意义，不在于证明他到过多少地方，而在于他的观察把风景拆开，让人看见山、水、洞、路和人如何共同构成喀斯特世界。",
+      "fragments": [
+        {
+          "route": "south-china",
+          "segment": 2,
+          "range": "桂林 - 阳朔 - 柳州",
+          "label": "桂林阳朔到柳州",
+          "role": "峰林、江水和洞穴构成广西山水核心"
+        },
+        {
+          "route": "south-china",
+          "segment": 3,
+          "range": "柳州 - 荔波",
+          "label": "柳州向黔南",
+          "role": "柳州把岭南入陆与桂中山水相接"
+        },
+        {
+          "route": "central-vertical",
+          "segment": 0,
+          "range": "贵港 - 南宁 - 百色",
+          "label": "桂中与桂西",
+          "role": "右江与桂西山地补出广西西缘"
+        },
+        {
+          "route": "south-north",
+          "segment": 1,
+          "range": "湛江 - 柳州",
+          "label": "渡海入陆到柳州",
+          "role": "从雷州半岛进入广西山地门户"
+        }
+      ]
+    },
+    {
+      "id": "xu-xiake-yunnan",
+      "title": "徐霞客的云南足迹",
+      "kicker": "大理、保山、腾冲、瑞丽、建水、昆明",
+      "deck": "云南段把徐霞客最后远游推向最沉重的部分：昆明、滇池、大理、鸡足山、保山、腾冲、高黎贡山与滇西边地共同组成湖盆、寺院、病痛、友人遗愿和边地道路的终章。",
+      "routeIds": [
+        "south-china",
+        "western-vertical"
+      ],
+      "crossing": "把云南专题单独放大，是为了让徐霞客线不止于“到达西南”。这里呈现的是一个人在晚年以身体承受地理，以笔记留下山水秩序的最后努力。",
+      "fragments": [
+        {
+          "route": "south-china",
+          "segment": 4,
+          "range": "大理 - 保山 - 腾冲",
+          "label": "滇西行",
+          "role": "大理、保山、腾冲把远游推向滇西"
+        },
+        {
+          "route": "south-china",
+          "segment": 5,
+          "range": "腾冲 - 瑞丽",
+          "label": "滇西终章",
+          "role": "瑞丽以边城和口岸收束主线"
+        },
+        {
+          "route": "south-china",
+          "segment": 6,
+          "range": "建水 - 玉溪 - 抚仙湖 - 昆明",
+          "label": "滇中支线",
+          "role": "滇中湖盆与古城为云南补出内向的一面"
+        },
+        {
+          "route": "western-vertical",
+          "segment": 0,
+          "range": "景洪 - 普洱 - 临沧",
+          "label": "滇南边地",
+          "role": "大理在西部纵贯中承担滇西北上升的门槛"
+        },
+        {
+          "route": "western-vertical",
+          "segment": 1,
+          "range": "临沧 - 大理 - 丽江 - 香格里拉",
+          "label": "滇西北上升",
+          "role": "从大理继续抬升到滇西北"
+        }
+      ]
+    }
+  ]
+}

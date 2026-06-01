@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>线路分段 | 行车中国</title>
+    <meta
+      name="description"
+      content="行车中国路线分段文章，展示单个章节的主题、节点和旅行节奏。"
+    >
+    <link rel="stylesheet" href="styles.css?v=20260601-side-panel-flow-2">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html#top" aria-label="行车中国首页">
+        <span class="brand-mark">行</span>
+        <span>
+          <strong>行车中国</strong>
+          <small>公路旅行志</small>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="index.html#top">总览地图</a>
+        <a href="index.html#routes">八条线路</a>
+        <a href="index.html#topics">特别专题</a>
+      </nav>
+    </header>
+
+    <main class="section-page">
+      <section class="section-hero">
+        <div class="section-hero-copy">
+          <a class="back-link" id="backToRoute" href="index.html#routes">返回路线主页</a>
+          <p class="eyebrow" id="sectionRouteName">路线分段</p>
+          <h1 id="sectionTitle">线路分段</h1>
+          <p class="lede" id="sectionDeck"></p>
+          <div class="fact-row" id="sectionFacts"></div>
+        </div>
+        <figure class="section-hero-image">
+          <img id="sectionImage" alt="">
+          <figcaption>
+            <span id="sectionImageCaption"></span>
+            <a id="sectionImageCredit" href="#" rel="noreferrer" target="_blank"></a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="section-detail-grid">
+        <article class="section-main-copy">
+          <div class="copy-block">
+            <h2>这一段怎么理解</h2>
+            <div id="sectionOverview"></div>
+          </div>
+          <div class="copy-block">
+            <h2>沿途节点</h2>
+            <ol class="section-node-list" id="sectionNodes"></ol>
+          </div>
+          <div class="copy-block">
+            <h2>旅行节奏</h2>
+            <div id="sectionRhythm"></div>
+          </div>
+          <div class="copy-block section-longread">
+            <h2>风土与历史地理</h2>
+            <div id="sectionEssay"></div>
+          </div>
+        </article>
+
+        <aside class="section-side-panel">
+          <div>
+            <h2>分区总览</h2>
+            <figure class="section-overview-map">
+              <div class="mini-map-toolbar" aria-label="分区地图缩放">
+                <button class="tool-button" id="sectionMapZoomOut" type="button" title="缩小地图">−</button>
+                <button class="tool-button" id="sectionMapZoomIn" type="button" title="放大地图">＋</button>
+              </div>
+              <svg id="sectionOverviewMap" role="img" aria-label="当前分段在全线中的位置" viewBox="0 0 420 260"></svg>
+              <figcaption id="sectionMapCaption"></figcaption>
+            </figure>
+          </div>
+          <div>
+            <h2>主题线索</h2>
+            <ul class="tag-list" id="sectionThemes"></ul>
+          </div>
+          <div>
+            <h2>前后章节</h2>
+            <div class="section-nav-cards" id="sectionNavCards"></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>行车中国，中文公路旅行线路志。</span>
+      <span>愿每一段路，都能在地图上找到自己的山河位置。</span>
+    </footer>
+
+    <script src="section.js?v=20260601-research" type="module"></script>
+  </body>
+</html>

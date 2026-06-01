@@ -1,0 +1,99 @@
+{
+  "notes": [
+    {
+      "source": "Unsplash",
+      "licenseUrl": "https://unsplash.com/license",
+      "use": "可免费用于个人和商业项目，通常不强制署名，但建议保留摄影师与来源。不要把未明显修改的图片直接转售，也不要批量抓取做图库。"
+    },
+    {
+      "source": "Pexels",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "use": "可免费用于网站、博客、应用和宣传物料，通常不强制署名。有人像或品牌时，不要暗示背书或用于冒犯性语境。"
+    },
+    {
+      "source": "Wikimedia Commons",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia/licenses/en",
+      "use": "适合找具体地点、建筑、历史、人文照片。必须逐张核对许可证；CC BY/CC BY-SA 通常需要署名和许可证链接，CC0/Public Domain 最接近“无版权”。"
+    }
+  ],
+  "workflow": [
+    "优先找 CC0/Public Domain，其次用 Unsplash/Pexels，再用 Wikimedia Commons 的 CC BY 或 CC BY-SA。",
+    "每张入库图片保留 photographer、source、license、licenseUrl、pageUrl、caption 六个字段。",
+    "避免直接使用没有明确授权的地方文旅号、商业图库、新闻图片、社交媒体图片。",
+    "有人像、车牌、商标、宗教场所内部、边境口岸等图片，即使许可证允许，也要单独判断语境。"
+  ],
+  "routes": [
+    {
+      "id": "silk-canal",
+      "visualBrief": ["帕米尔雪山与塔县", "喀什街巷与绿洲", "敦煌沙丘与河西走廊", "江南运河城市"],
+      "searches": [
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/dunhuang"},
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/kashgar"},
+        {"source": "Wikimedia Commons", "url": "https://commons.wikimedia.org/w/index.php?search=Kashgar+Dunhuang+Grand+Canal&title=Special:MediaSearch&type=image"}
+      ]
+    },
+    {
+      "id": "coastal",
+      "visualBrief": ["东北边境河口", "山东半岛海岸", "闽南古港与海边街巷", "北部湾与口岸城市"],
+      "searches": [
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/china-coast"},
+        {"source": "Pexels", "url": "https://www.pexels.com/search/china%20coast/"},
+        {"source": "Wikimedia Commons", "url": "https://commons.wikimedia.org/w/index.php?search=China+coast+Qingdao+Xiamen+Beihai&title=Special:MediaSearch&type=image"}
+      ]
+    },
+    {
+      "id": "yangtze",
+      "visualBrief": ["上海江海口", "长江中游城市与桥", "三峡峡江", "高原河谷与江源意象"],
+      "searches": [
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/yangtze-river"},
+        {"source": "Pexels", "url": "https://www.pexels.com/search/yangtze/"},
+        {"source": "Wikimedia Commons", "url": "https://commons.wikimedia.org/w/index.php?search=Yangtze+River+Three+Gorges+Shanghai&title=Special:MediaSearch&type=image"}
+      ]
+    },
+    {
+      "id": "east-west",
+      "visualBrief": ["南疆荒漠与绿洲", "柴达木公路", "华北长城内外", "黑龙江界江与东北森林"],
+      "searches": [
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/xinjiang-road"},
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/china-road"},
+        {"source": "Wikimedia Commons", "url": "https://commons.wikimedia.org/w/index.php?search=Heilongjiang+Xinjiang+Qaidam+road&title=Special:MediaSearch&type=image"}
+      ]
+    },
+    {
+      "id": "south-north",
+      "visualBrief": ["海南热带海岸", "中部山地", "晋陕黄河", "漠河北国森林"],
+      "searches": [
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/hainan"},
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/china-winter"},
+        {"source": "Wikimedia Commons", "url": "https://commons.wikimedia.org/w/index.php?search=Hainan+Mohe+Shennongjia+Yellow+River&title=Special:MediaSearch&type=image"}
+      ]
+    },
+    {
+      "id": "western-vertical",
+      "visualBrief": ["西双版纳热带边地", "滇西北雪山古城", "藏东峡谷", "阿里高原与北疆湖泊"],
+      "searches": [
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/yunnan"},
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/tibet-road"},
+        {"source": "Wikimedia Commons", "url": "https://commons.wikimedia.org/w/index.php?search=Yunnan+Tibet+Kanas+road&title=Special:MediaSearch&type=image"}
+      ]
+    },
+    {
+      "id": "central-vertical",
+      "visualBrief": ["广西河谷与丘陵", "贵州瀑布与喀斯特", "甘南草地寺院", "河西丹霞与关城"],
+      "searches": [
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/guizhou"},
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/zhangye"},
+        {"source": "Wikimedia Commons", "url": "https://commons.wikimedia.org/w/index.php?search=Guizhou+Gannan+Zhangye+Jiayuguan&title=Special:MediaSearch&type=image"}
+      ]
+    },
+    {
+      "id": "south-china",
+      "visualBrief": ["江南水网", "黄山与皖赣山地", "桂林阳朔喀斯特", "滇西火山温泉与边城"],
+      "searches": [
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/guilin"},
+        {"source": "Unsplash", "url": "https://unsplash.com/s/photos/huangshan"},
+        {"source": "Wikimedia Commons", "url": "https://commons.wikimedia.org/w/index.php?search=Xu+Xiake+Guilin+Huangshan+Tengchong&title=Special:MediaSearch&type=image"}
+      ]
+    }
+  ]
+}

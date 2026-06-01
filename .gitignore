@@ -1,0 +1,9 @@
+.DS_Store
+tmp-content-drafts/
+
+# Local agent/project notes; not needed by the hosted static site.
+AGENTS.md
+
+# Design experiments that are not part of the production site.
+badge-alternatives.html
+visual-options.html

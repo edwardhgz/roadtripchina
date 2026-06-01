@@ -1,0 +1,1090 @@
+{
+  "generatedAt": "2026-06-01T04:48:47.386Z",
+  "source": "Wikimedia Commons API",
+  "licenseNote": "Images are copied from Wikimedia Commons thumbnails. Keep each page's author/license/source attribution with any public use.",
+  "photoWidth": 1600,
+  "photosPerPage": 2,
+  "pages": [
+    {
+      "key": "index",
+      "url": "index.html",
+      "kind": "home",
+      "title": "行车中国",
+      "queries": [
+        "China road landscape",
+        "China highway mountain road",
+        "Chinese landscape road trip"
+      ],
+      "status": "ok",
+      "photos": [
+        {
+          "role": "primary",
+          "file": "assets/photos/page-photos/index/01.jpg",
+          "title": "Karakoram Highway in pakistan",
+          "commonsTitle": "File:Karakoram Highway in pakistan.jpg",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Karakoram_Highway_in_pakistan.jpg",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/95/Karakoram_Highway_in_pakistan.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "artist": "Khurramshabbir",
+          "credit": "Own work",
+          "description": "The Karakoram Highway (KKH) is one of the highest paved international roads in the world.[1] It connects the Xinjiang Uyghur Autonomous Region of China and Gilgit–Baltistan of Pakistan across the Karakoram mountain range, through the Khunjerab Pass, located at 36°51′00″N 75°25′40″E, at an elevation of 4,693 metres (15,397 ft).[2][3",
+          "width": 6000,
+          "height": 4000,
+          "query": "China highway mountain road"
+        },
+        {
+          "role": "alternate",
+          "file": "assets/photos/page-photos/index/02.jpg",
+          "title": "Khunjerab Pass Road - Karakoram Highway",
+          "commonsTitle": "File:Khunjerab Pass Road - Karakoram Highway.jpg",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Khunjerab_Pass_Road_-_Karakoram_Highway.jpg",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Khunjerab_Pass_Road_-_Karakoram_Highway.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "artist": "Shaguftakarim",
+          "credit": "Own work",
+          "description": "Khunjerab Pass is a high mountain pass on the northern border of Pakistan with China, at an elevation of 4.733 meters (15,528 feet) above the sea level. The Khunjerab Pass is the highest border-crossing in the world and the highest point on the Karakoram Highway.",
+          "width": 2937,
+          "height": 1972,
+          "query": "China highway mountain road"
+        }
+      ]
+    },
+    {
+      "key": "route-silk-canal",
+      "url": "route.html?route=silk-canal",
+      "kind": "route",
+      "title": "丝路与运河之路",
+      "queries": [
+        "Silk Road China Hexi Corridor landscape",
+        "Grand Canal China Jiangnan water town",
+        "Kashgar Pamir Mountains"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "route-coastal",
+      "url": "route.html?route=coastal",
+      "kind": "route",
+      "title": "中国海岸之路",
+      "queries": [
+        "China coastline Fujian coast",
+        "Shandong peninsula coast Qingdao",
+        "Pearl River Estuary Hong Kong Zhuhai"
+      ],
+      "status": "ok",
+      "photos": [
+        {
+          "role": "primary",
+          "file": "assets/photos/page-photos/route-coastal/01.jpg",
+          "title": "Qingdao, China ESA349719",
+          "commonsTitle": "File:Qingdao, China ESA349719.jpg",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Qingdao,_China_ESA349719.jpg",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Qingdao%2C_China_ESA349719.jpg",
+          "license": "CC BY-SA 3.0 igo",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/deed.en",
+          "artist": "European Space Agency",
+          "credit": "http://www.esa.int/spaceinimages/Images/2015/11/Qingdao_China",
+          "description": "This impressive false-colour image features the city of Qingdao and its surroundings, in China’s eastern Shandong province. A major cultural centre, Qingdao is home to the Ocean University of China and other higher education facilities. It is also one of China’s main hubs for marine science and technology. Qingdao sits on the south coast of the Shandong Peninsula, at the eastern entrance to Jiaozhou Bay. Off the Yellow Sea, it is one of the best natural harbours in China. Owing to the satellite’s multispectral high-resolution instrument, we can clearly make out boats entering and exiting the bay, along with the impressive 42 km-long Jiaozhou Bay Bridge running across the entire bay. As of 2012, Guinness World Records lists the bridge as the world’s longest bridge over water. Various aquacultures are visible along the coast of the bay, including the farming of fish, crustaceans, molluscs and aquatic plants. Towards the top of the image, we can make out a big body of water, the Jihongtan Reservoir, the biggest of the various reservoirs featured. The Dagu River is also visible, snaking its way from the image top down into the bay. Owing to the image processing, vegetation appears in reds scattered throughout the entire scene, showing how fertile and lush the region is. Sentinel-2A has been in orbit since 23 June. It is a polar-orbiting, multispectral high-resolution imaging satellite for land monitoring, covering vegetation, soil and water cover, inland waterways and coastal areas. Captured by Sentinel-2A on 21 August, this image is also featured on the Earth from Space video programme.",
+          "width": 2000,
+          "height": 1542,
+          "query": "Shandong peninsula coast Qingdao"
+        }
+      ]
+    },
+    {
+      "key": "route-yangtze",
+      "url": "route.html?route=yangtze",
+      "kind": "route",
+      "title": "长江源海之路",
+      "queries": [
+        "Yangtze River China Three Gorges",
+        "Yangtze River source China",
+        "Shanghai Yangtze estuary"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "route-east-west",
+      "url": "route.html?route=east-west",
+      "kind": "route",
+      "title": "中国东西极之路",
+      "queries": [
+        "Khorgos Xinjiang border landscape",
+        "Qaidam Basin Qinghai landscape",
+        "Fuyuan Ussuri River China"
+      ],
+      "status": "ok",
+      "photos": [
+        {
+          "role": "primary",
+          "file": "assets/photos/page-photos/route-east-west/01.jpg",
+          "title": "Amur and Ussuri - P1040668",
+          "commonsTitle": "File:Amur and Ussuri - P1040668.JPG",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amur_and_Ussuri_-_P1040668.JPG",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/20/Amur_and_Ussuri_-_P1040668.JPG",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+          "artist": "User:Vmenkov",
+          "credit": "Own work",
+          "description": "The Amur (Heilongjiang) and Ussuri (Wusuli) Rivers near their confluence. Looking roughly north-north-west. The Ussuri runs from the left to the right in the lower part of the photo; the Amur runs from the upper left to center right. Between the two big rivers are, from the left to the right, the Chinese mainland (Fuyuan County; left); the Yinlong Island (Tarabarov Island; a small island near the Amur); the Bolshoy Ussuriysky (Heixiazi) Island (runs from the center of the picture to the right edge of the frame). The new China-Russia border across the Bolshoy Ussuriysky (Heixiazi) Island runs roughly through the center of the picture. It apparently is visible on the photo as a diagonal line - I assume there is a clearing through the vegetation, and some kind of a road for the border patrol to walk on.",
+          "width": 2048,
+          "height": 1536,
+          "query": "Fuyuan Ussuri River China"
+        }
+      ]
+    },
+    {
+      "key": "route-south-north",
+      "url": "route.html?route=south-north",
+      "kind": "route",
+      "title": "中国南北极之路",
+      "queries": [
+        "Xishuangbanna tropical landscape",
+        "Mohe Heilongjiang forest",
+        "Hainan Qiongzhou Strait"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "route-western-vertical",
+      "url": "route.html?route=western-vertical",
+      "kind": "route",
+      "title": "西部纵贯之路",
+      "queries": [
+        "G214 Yunnan Tibet highway",
+        "Meili Snow Mountain Deqin",
+        "Ngari Tibet G219"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "route-central-vertical",
+      "url": "route.html?route=central-vertical",
+      "kind": "route",
+      "title": "中部纵贯之路",
+      "queries": [
+        "Guilin karst landscape",
+        "Qinghai Lake Xining landscape",
+        "Zhangye Danxia Jiayuguan"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "route-south-china",
+      "url": "route.html?route=south-china",
+      "kind": "route",
+      "title": "徐霞客最后远游之路",
+      "queries": [
+        "Xu Xiake Yunnan travel landscape",
+        "Guilin Li River karst",
+        "Dali Erhai Yunnan"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-silk-canal-01",
+      "url": "section.html?route=silk-canal&segment=0",
+      "kind": "section",
+      "title": "丝路运河 / 帕米尔与喀什",
+      "queries": [
+        "Kashgar Pamir Mountains",
+        "Karakoram Highway Xinjiang",
+        "喀什 帕米尔"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-silk-canal-02",
+      "url": "section.html?route=silk-canal&segment=1",
+      "kind": "section",
+      "title": "丝路运河 / 塔里木北缘",
+      "queries": [
+        "Tarim Basin Kuqa oasis",
+        "Taklamakan desert oasis",
+        "塔里木 库车 绿洲"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-silk-canal-03",
+      "url": "section.html?route=silk-canal&segment=2",
+      "kind": "section",
+      "title": "丝路运河 / 天山西廊",
+      "queries": [
+        "Sayram Lake Ili Valley",
+        "Ili Valley Xinjiang",
+        "赛里木湖 伊犁"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-silk-canal-04",
+      "url": "section.html?route=silk-canal&segment=3",
+      "kind": "section",
+      "title": "丝路运河 / 天山东行",
+      "queries": [
+        "Turpan Tianshan Xinjiang",
+        "Urumqi Tianshan mountains",
+        "吐鲁番 天山"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-silk-canal-05",
+      "url": "section.html?route=silk-canal&segment=4",
+      "kind": "section",
+      "title": "丝路运河 / 河西走廊",
+      "queries": [
+        "Hexi Corridor Qilian Mountains",
+        "Jiayuguan Gansu Qilian",
+        "河西走廊 祁连山"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-silk-canal-06",
+      "url": "section.html?route=silk-canal&segment=5",
+      "kind": "section",
+      "title": "丝路运河 / 关中与中原",
+      "queries": [
+        "Xi'an Luoyang Yellow River",
+        "Longmen Grottoes Yellow River",
+        "西安 洛阳 黄河"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-silk-canal-07",
+      "url": "section.html?route=silk-canal&segment=6",
+      "kind": "section",
+      "title": "丝路运河 / 运河北段",
+      "queries": [
+        "Grand Canal China Yangzhou",
+        "Jining Grand Canal China",
+        "京杭大运河 扬州"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-silk-canal-08",
+      "url": "section.html?route=silk-canal&segment=7",
+      "kind": "section",
+      "title": "丝路运河 / 江南水网与东海",
+      "queries": [
+        "Jiangnan water town Suzhou Hangzhou",
+        "Ningbo Hangzhou Bay Jiangnan",
+        "江南水乡 苏州 杭州"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-silk-canal-09",
+      "url": "section.html?route=silk-canal&segment=8",
+      "kind": "section",
+      "title": "丝路运河 / 北疆支线",
+      "queries": [
+        "Kanas Lake Altay Xinjiang",
+        "Northern Xinjiang Altay mountains",
+        "喀纳斯 阿勒泰"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-coastal-01",
+      "url": "section.html?route=coastal&segment=0",
+      "kind": "section",
+      "title": "沿海 / 东北海岸开场",
+      "queries": [
+        "Dalian coast Liaodong Peninsula",
+        "Liaodong Peninsula coastline",
+        "大连 海岸"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-coastal-02",
+      "url": "section.html?route=coastal&segment=1",
+      "kind": "section",
+      "title": "沿海 / 辽东与山东半岛",
+      "queries": [
+        "Shandong Peninsula coast Qingdao",
+        "Qingdao coastline Laoshan",
+        "青岛 山东半岛"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-coastal-03",
+      "url": "section.html?route=coastal&segment=2",
+      "kind": "section",
+      "title": "沿海 / 黄海到长三角",
+      "queries": [
+        "Yangtze River estuary Shanghai",
+        "Nantong Yangtze River Delta coast",
+        "上海 长江口"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-coastal-04",
+      "url": "section.html?route=coastal&segment=3",
+      "kind": "section",
+      "title": "沿海 / 浙闽曲岸",
+      "queries": [
+        "Fujian coast Xiapu",
+        "Zhejiang Fujian rocky coast",
+        "福建 海岸 霞浦"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-coastal-05",
+      "url": "section.html?route=coastal&segment=4",
+      "kind": "section",
+      "title": "沿海 / 珠江口外缘",
+      "queries": [
+        "Pearl River Estuary Hong Kong Zhuhai",
+        "Macau Zhuhai coast",
+        "珠江口 港珠澳"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-coastal-06",
+      "url": "section.html?route=coastal&segment=5",
+      "kind": "section",
+      "title": "沿海 / 北部湾收束",
+      "queries": [
+        "Beibu Gulf Guangxi coast",
+        "Fangchenggang Beibu Gulf",
+        "北部湾 防城港"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-coastal-07",
+      "url": "section.html?route=coastal&segment=6",
+      "kind": "section",
+      "title": "沿海 / 台湾海岸支线",
+      "queries": [
+        "Taiwan east coast",
+        "Taiwan coastline Hualien",
+        "台湾 东海岸"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-yangtze-01",
+      "url": "section.html?route=yangtze&segment=0",
+      "kind": "section",
+      "title": "长江 / 江海入口",
+      "queries": [
+        "Shanghai Yangtze estuary",
+        "Yangtze River mouth Shanghai",
+        "长江口 上海"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-yangtze-02",
+      "url": "section.html?route=yangtze&segment=1",
+      "kind": "section",
+      "title": "长江 / 下游城镇带",
+      "queries": [
+        "Nanjing Yangtze River",
+        "Yangzhou Yangtze River China",
+        "南京 长江"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-yangtze-03",
+      "url": "section.html?route=yangtze&segment=2",
+      "kind": "section",
+      "title": "长江 / 中游湖区",
+      "queries": [
+        "Dongting Lake Poyang Lake Wuhan",
+        "Wuhan Yangtze River lake",
+        "洞庭湖 鄱阳湖 武汉"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-yangtze-04",
+      "url": "section.html?route=yangtze&segment=3",
+      "kind": "section",
+      "title": "长江 / 三峡与峡江",
+      "queries": [
+        "Three Gorges Yangtze River",
+        "Qutang Gorge Yangtze",
+        "三峡 长江"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-yangtze-05",
+      "url": "section.html?route=yangtze&segment=4",
+      "kind": "section",
+      "title": "长江 / 巴蜀腹地",
+      "queries": [
+        "Chongqing Yangtze River",
+        "Chengdu Chongqing Yangtze",
+        "重庆 长江"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-yangtze-06",
+      "url": "section.html?route=yangtze&segment=5",
+      "kind": "section",
+      "title": "长江 / 藏东与藏北",
+      "queries": [
+        "Nyingchi Yarlung Tsangpo",
+        "Tibet Nyingchi valley",
+        "林芝 雅鲁藏布"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-yangtze-07",
+      "url": "section.html?route=yangtze&segment=6",
+      "kind": "section",
+      "title": "长江 / 阿里方向",
+      "queries": [
+        "Ngari Tibet Plateau",
+        "Mount Kailash Ngari",
+        "阿里 西藏"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-yangtze-08",
+      "url": "section.html?route=yangtze&segment=7",
+      "kind": "section",
+      "title": "长江 / 江源支线",
+      "queries": [
+        "Yangtze River source Tanggula",
+        "Tuotuo River Yangtze source",
+        "长江源 唐古拉"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-east-west-01",
+      "url": "section.html?route=east-west&segment=0",
+      "kind": "section",
+      "title": "东西极 / 西部边境",
+      "queries": [
+        "Khorgos Xinjiang border",
+        "Pamir Xinjiang border landscape",
+        "霍尔果斯 口岸"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-east-west-02",
+      "url": "section.html?route=east-west&segment=1",
+      "kind": "section",
+      "title": "东西极 / 荒漠与柴达木",
+      "queries": [
+        "Qaidam Basin Qinghai",
+        "Golmud Qaidam desert",
+        "柴达木 格尔木"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-east-west-03",
+      "url": "section.html?route=east-west&segment=2",
+      "kind": "section",
+      "title": "东西极 / 青甘高地",
+      "queries": [
+        "Gannan Qinghai highlands",
+        "Qinghai Gansu grassland",
+        "青海 甘南"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-east-west-04",
+      "url": "section.html?route=east-west&segment=3",
+      "kind": "section",
+      "title": "东西极 / 秦岭门户",
+      "queries": [
+        "Qinling Mountains Baoji",
+        "Qinling mountain road",
+        "秦岭 宝鸡"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-east-west-05",
+      "url": "section.html?route=east-west&segment=4",
+      "kind": "section",
+      "title": "东西极 / 华北转场",
+      "queries": [
+        "Beijing North China Plain",
+        "Hebei plain Beijing",
+        "北京 华北平原"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-east-west-06",
+      "url": "section.html?route=east-west&segment=5",
+      "kind": "section",
+      "title": "东西极 / 东北平原",
+      "queries": [
+        "Harbin Songnen Plain",
+        "Northeast China plain Heilongjiang",
+        "哈尔滨 松嫩平原"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-east-west-07",
+      "url": "section.html?route=east-west&segment=6",
+      "kind": "section",
+      "title": "东西极 / 东极收束",
+      "queries": [
+        "Fuyuan Ussuri River China",
+        "Heixiazi Island Fuyuan",
+        "抚远 乌苏里江"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-east-west-08",
+      "url": "section.html?route=east-west&segment=7",
+      "kind": "section",
+      "title": "东西极 / 东北北上支线",
+      "queries": [
+        "Mohe Heilongjiang forest",
+        "Daxinganling Mohe",
+        "漠河 黑龙江"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-north-01",
+      "url": "section.html?route=south-north&segment=0",
+      "kind": "section",
+      "title": "南北极 / 热带开场",
+      "queries": [
+        "Xishuangbanna tropical landscape",
+        "Jinghong Mekong River",
+        "西双版纳 热带"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-north-02",
+      "url": "section.html?route=south-north&segment=1",
+      "kind": "section",
+      "title": "南北极 / 渡海入陆",
+      "queries": [
+        "Hainan Qiongzhou Strait",
+        "Haikou Hainan coast",
+        "海南 琼州海峡"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-north-03",
+      "url": "section.html?route=south-north&segment=2",
+      "kind": "section",
+      "title": "南北极 / 中部山地",
+      "queries": [
+        "Zhangjiajie Wuling Mountains",
+        "Wuling Mountains Hunan",
+        "张家界 武陵"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-north-04",
+      "url": "section.html?route=south-north&segment=3",
+      "kind": "section",
+      "title": "南北极 / 晋南与古城",
+      "queries": [
+        "Pingyao Shanxi Taihang",
+        "Shanxi ancient city mountains",
+        "平遥 太行山"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-north-05",
+      "url": "section.html?route=south-north&segment=4",
+      "kind": "section",
+      "title": "南北极 / 华北北缘",
+      "queries": [
+        "Zhangjiakou Great Wall grassland",
+        "North China Great Wall Zhangjiakou",
+        "张家口 长城"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-north-06",
+      "url": "section.html?route=south-north&segment=5",
+      "kind": "section",
+      "title": "南北极 / 北国森林",
+      "queries": [
+        "Mohe Daxinganling forest",
+        "Greater Khingan forest China",
+        "大兴安岭 漠河"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-north-07",
+      "url": "section.html?route=south-north&segment=6",
+      "kind": "section",
+      "title": "南北极 / 黄河支线",
+      "queries": [
+        "Hukou Waterfall Yellow River",
+        "Yellow River Hukou",
+        "壶口瀑布 黄河"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-western-vertical-01",
+      "url": "section.html?route=western-vertical&segment=0",
+      "kind": "section",
+      "title": "西纵 / 热带边地",
+      "queries": [
+        "Xishuangbanna Mekong Jinghong",
+        "Mekong River Yunnan Jinghong",
+        "景洪 澜沧江"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-western-vertical-02",
+      "url": "section.html?route=western-vertical&segment=1",
+      "kind": "section",
+      "title": "西纵 / 滇西北上升",
+      "queries": [
+        "Dali Lijiang Shangri-La Meili Snow Mountain",
+        "Meili Snow Mountain Deqin",
+        "梅里雪山 香格里拉"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-western-vertical-03",
+      "url": "section.html?route=western-vertical&segment=2",
+      "kind": "section",
+      "title": "西纵 / 藏东山谷",
+      "queries": [
+        "Deqin Yanjing Nyingchi G318",
+        "Ranwu Lake Bomi Nyingchi",
+        "然乌 波密 林芝"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-western-vertical-04",
+      "url": "section.html?route=western-vertical&segment=3",
+      "kind": "section",
+      "title": "西纵 / 拉萨与后藏",
+      "queries": [
+        "Lhasa Shigatse Yamdrok Lake",
+        "Tibet Lhasa Shigatse valley",
+        "拉萨 日喀则 羊湖"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-western-vertical-05",
+      "url": "section.html?route=western-vertical&segment=4",
+      "kind": "section",
+      "title": "西纵 / 阿里转场",
+      "queries": [
+        "Ngari Mount Kailash G219",
+        "Tibet Ngari road",
+        "阿里 冈仁波齐"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-western-vertical-06",
+      "url": "section.html?route=western-vertical&segment=5",
+      "kind": "section",
+      "title": "西纵 / 南疆北上",
+      "queries": [
+        "Hotan Kuqa Taklamakan",
+        "Taklamakan desert Hotan",
+        "和田 库车 塔克拉玛干"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-western-vertical-07",
+      "url": "section.html?route=western-vertical&segment=6",
+      "kind": "section",
+      "title": "西纵 / 北疆收束",
+      "queries": [
+        "Kanas Altay Xinjiang",
+        "Altay mountains Xinjiang",
+        "喀纳斯 阿勒泰"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-western-vertical-08",
+      "url": "section.html?route=western-vertical&segment=7",
+      "kind": "section",
+      "title": "西纵 / 天山西段支线",
+      "queries": [
+        "Sayram Lake Horgos",
+        "Ili Xinjiang Sayram Lake",
+        "赛里木湖 霍尔果斯"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-central-vertical-01",
+      "url": "section.html?route=central-vertical&segment=0",
+      "kind": "section",
+      "title": "中纵 / 桂中开场",
+      "queries": [
+        "Liuzhou Guilin karst",
+        "Guangxi karst Guilin",
+        "柳州 桂林 喀斯特"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-central-vertical-02",
+      "url": "section.html?route=central-vertical&segment=1",
+      "kind": "section",
+      "title": "中纵 / 黔西山地",
+      "queries": [
+        "Guizhou karst Bijie",
+        "Guizhou mountain village karst",
+        "贵州 喀斯特"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-central-vertical-03",
+      "url": "section.html?route=central-vertical&segment=2",
+      "kind": "section",
+      "title": "中纵 / 川西南转折",
+      "queries": [
+        "Xichang Sichuan mountain road",
+        "Panzhihua Jinsha River",
+        "西昌 攀枝花"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-central-vertical-04",
+      "url": "section.html?route=central-vertical&segment=3",
+      "kind": "section",
+      "title": "中纵 / 高原边缘",
+      "queries": [
+        "Kangding Litang Sichuan Tibetan",
+        "Litang Sichuan grassland",
+        "康定 理塘"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-central-vertical-05",
+      "url": "section.html?route=central-vertical&segment=4",
+      "kind": "section",
+      "title": "中纵 / 青海门户",
+      "queries": [
+        "Qinghai Lake Xining",
+        "Qinghai Lake landscape",
+        "青海湖 西宁"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-central-vertical-06",
+      "url": "section.html?route=central-vertical&segment=5",
+      "kind": "section",
+      "title": "中纵 / 河西收束",
+      "queries": [
+        "Zhangye Danxia Jiayuguan",
+        "Zhangye Danxia Gansu",
+        "张掖丹霞 嘉峪关"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-central-vertical-07",
+      "url": "section.html?route=central-vertical&segment=6",
+      "kind": "section",
+      "title": "中纵 / 川西支线",
+      "queries": [
+        "Jiuzhaigou Aba Sichuan",
+        "Aba Sichuan valley",
+        "九寨沟 阿坝"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-china-01",
+      "url": "section.html?route=south-china&segment=0",
+      "kind": "section",
+      "title": "华南 / 江南启程",
+      "queries": [
+        "Suzhou Shaoxing Jiangnan water town",
+        "Jiangnan canal water town",
+        "苏州 绍兴 江南水乡"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-china-02",
+      "url": "section.html?route=south-china&segment=1",
+      "kind": "section",
+      "title": "华南 / 皖赣入山",
+      "queries": [
+        "Huangshan Wuyuan Jiangxi mountains",
+        "Wuyuan Jiangxi landscape",
+        "黄山 婺源"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-china-03",
+      "url": "section.html?route=south-china&segment=2",
+      "kind": "section",
+      "title": "华南 / 湘桂山水",
+      "queries": [
+        "Guilin Li River Yangshuo",
+        "Li River karst landscape",
+        "桂林 漓江 阳朔"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-china-04",
+      "url": "section.html?route=south-china&segment=3",
+      "kind": "section",
+      "title": "华南 / 喀斯特腹地",
+      "queries": [
+        "Libo Guizhou karst",
+        "Guizhou Guangxi karst landscape",
+        "荔波 喀斯特"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-china-05",
+      "url": "section.html?route=south-china&segment=4",
+      "kind": "section",
+      "title": "华南 / 入滇西行",
+      "queries": [
+        "Dali Erhai Yunnan",
+        "Erhai Lake Dali",
+        "大理 洱海"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-china-06",
+      "url": "section.html?route=south-china&segment=5",
+      "kind": "section",
+      "title": "华南 / 滇西终章",
+      "queries": [
+        "Tengchong Baoshan Nujiang",
+        "Nujiang valley Yunnan",
+        "腾冲 怒江"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "section-south-china-07",
+      "url": "section.html?route=south-china&segment=6",
+      "kind": "section",
+      "title": "华南 / 滇中支线",
+      "queries": [
+        "Kunming Stone Forest Yunnan",
+        "Dianchi Kunming Yunnan",
+        "昆明 石林"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "topic-northern-xinjiang",
+      "url": "topic.html?topic=northern-xinjiang",
+      "kind": "topic",
+      "title": "北疆：天山北坡与阿勒泰",
+      "queries": [
+        "Kanas Lake Altay Xinjiang",
+        "Northern Xinjiang Altay landscape",
+        "喀纳斯 阿勒泰"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "topic-tarim-kunlun-oasis",
+      "url": "topic.html?topic=tarim-kunlun-oasis",
+      "kind": "topic",
+      "title": "南疆：塔里木绿洲与昆仑边缘",
+      "queries": [
+        "Kashgar oasis Kunlun Mountains",
+        "Tarim Basin oasis Xinjiang",
+        "塔里木 昆仑 绿洲"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "topic-hexi-corridor",
+      "url": "topic.html?topic=hexi-corridor",
+      "kind": "topic",
+      "title": "河西走廊：祁连山北麓",
+      "queries": [
+        "Hexi Corridor Qilian Mountains",
+        "Jiayuguan Gansu Qilian",
+        "河西走廊 祁连山"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "topic-gannan-gateway",
+      "url": "topic.html?topic=gannan-gateway",
+      "kind": "topic",
+      "title": "甘南：进入高原前的门廊",
+      "queries": [
+        "Labrang Monastery Gannan grassland",
+        "Gannan Tibetan grassland",
+        "甘南 拉卜楞寺"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "topic-western-sichuan-highlands",
+      "url": "topic.html?topic=western-sichuan-highlands",
+      "kind": "topic",
+      "title": "川西：康定、理塘与岷江大渡河",
+      "queries": [
+        "Kangding Litang Sichuan Tibetan",
+        "Sichuan western highlands",
+        "康定 理塘 川西"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "topic-taihang-eight-passes",
+      "url": "topic.html?topic=taihang-eight-passes",
+      "kind": "topic",
+      "title": "太行山：八陉古道与山西东缘",
+      "queries": [
+        "Taihang Mountains Shanxi",
+        "Pingxingguan Taihang",
+        "太行山 八陉"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "topic-xu-xiake-guangxi",
+      "url": "topic.html?topic=xu-xiake-guangxi",
+      "kind": "topic",
+      "title": "徐霞客的广西足迹",
+      "queries": [
+        "Guilin Li River Yangshuo karst",
+        "Guangxi karst landscape",
+        "徐霞客 广西 桂林"
+      ],
+      "status": "missing",
+      "photos": []
+    },
+    {
+      "key": "topic-xu-xiake-yunnan",
+      "url": "topic.html?topic=xu-xiake-yunnan",
+      "kind": "topic",
+      "title": "徐霞客的云南足迹",
+      "queries": [
+        "Dali Tengchong Yunnan landscape",
+        "Yunnan Dali Erhai Tengchong",
+        "徐霞客 云南 大理"
+      ],
+      "status": "missing",
+      "photos": []
+    }
+  ]
+}
