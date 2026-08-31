@@ -151,8 +151,6 @@ async function init() {
 function renderStaticShell() {
   elements.routeCount.textContent = state.routes.length;
   elements.totalDistance.textContent = formatKm(sum(state.routes.map((route) => route.stats.totalKm)));
-  renderAtlasPhoto();
-
   elements.routePills.replaceChildren(...state.routes.map(createPill));
   elements.routeCards.replaceChildren(...state.routes.map(createCard));
 
@@ -191,6 +189,16 @@ function renderStaticShell() {
   elements.basemapSatellite.addEventListener("click", () => {
     state.basemap = "satellite";
     render();
+  });
+
+  attachMapDrag(elements.routeMap, {
+    width: viewBox.width,
+    height: viewBox.height,
+    getPan: () => state.mapPan,
+    render: renderMap,
+    setSuppress: () => {
+      state.mapDragSuppressUntil = Date.now() + 220;
+    }
   });
 
   window.addEventListener("resize", () => renderMap());
@@ -274,8 +282,8 @@ function render() {
   document.documentElement.style.setProperty("--active", selected.color);
   document.documentElement.style.setProperty("--theme", selected.color);
   document.documentElement.style.setProperty("--theme-accent", selected.accent);
-  elements.mapCaption.textContent = "八线山河艺术总览";
-  elements.mapAttribution.textContent = "风格化中国轮廓 · 路线轨迹";
+  elements.mapCaption.textContent = state.mapMode === "selected" ? `${selected.title}路线图` : "八条线路全图";
+  elements.mapAttribution.textContent = `${mapLayers[state.basemap].attribution} · 路线轨迹`;
 
   document.querySelectorAll("[data-route-id]").forEach((node) => {
     node.classList.toggle("is-active", node.dataset.routeId === selected.id);
@@ -588,21 +596,18 @@ function stopListItem(stop, route) {
 
 function renderMap() {
   const selected = currentRoute();
-  const mapBounds = boundsForRoutes(state.routes);
+  const visibleRoutes = state.mapMode === "selected" ? [selected] : state.routes;
+  const mapBounds = state.mapMode === "selected" ? selected.bounds : boundsForRoutes(state.routes);
   const viewport = mapViewport(mapBounds);
-  const baseProject = viewport.project;
-  const project = (coordinate) => {
-    const point = baseProject(coordinate);
-    return {
-      x: 500 + (point.x - 500) * 1.18,
-      y: 330 + (point.y - 310) * 1.2
-    };
-  };
+  const project = viewport.project;
 
   elements.routeMap.replaceChildren();
-  elements.routeMap.append(createAtlasBackdrop());
-  elements.routeMap.append(createChinaSilhouette(project));
-  state.routes.forEach((route) => drawAtlasRoute(route, project, route.id === selected.id));
+  elements.routeMap.append(createBackground());
+  elements.routeMap.append(createTileLayer(viewport));
+  elements.routeMap.append(createTileScrim());
+  elements.routeMap.append(createGraticule(project, mapBounds));
+  visibleRoutes.forEach((route) => drawRoute(route, project, route.id === selected.id));
+  if (state.mapMode === "selected") drawMarkers(selected, project);
 }
 
 function createBackground() {

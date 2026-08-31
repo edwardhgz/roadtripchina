@@ -432,21 +432,21 @@ h4 {
   align-self: center;
   height: min(62vh, 660px);
   min-height: min(62vh, 660px);
-  border-color: rgba(36, 78, 82, 0.2);
+  border-color: rgba(36, 78, 82, 0.24);
   background:
-    linear-gradient(135deg, rgba(255, 252, 244, 0.96), rgba(223, 235, 227, 0.88)),
-    #e7eee9;
+    linear-gradient(180deg, rgba(247, 242, 231, 0.72), rgba(232, 239, 235, 0.56)),
+    #e8efeb;
   box-shadow:
-    0 28px 60px rgba(18, 42, 44, 0.18),
-    -18px 18px 0 rgba(111, 168, 183, 0.17);
+    0 24px 52px rgba(18, 42, 44, 0.18),
+    -14px 14px 0 rgba(111, 168, 183, 0.14);
 }
 
 .atlas-map-panel .map-toolbar {
-  display: none;
+  display: flex;
 }
 
 .atlas-map-panel svg {
-  cursor: default;
+  cursor: grab;
 }
 
 .atlas-art-paper {
@@ -2059,10 +2059,12 @@ h4 {
 }
 
 .segments {
+  --segment-card-width: calc(50% - 46px);
+  --segment-step: clamp(126px, 9.5vw, 146px);
   display: flex;
   position: relative;
   flex-direction: column;
-  gap: clamp(34px, 5vw, 62px);
+  gap: clamp(2px, 0.45vw, 6px);
   max-width: 1180px;
   margin: 0 auto;
   counter-reset: segment-card;
@@ -2085,12 +2087,15 @@ h4 {
 .segment-card {
   position: relative;
   display: grid;
-  align-content: start;
-  width: calc(50% - 58px);
-  min-height: 168px;
+  grid-template-columns: minmax(0, 1fr) clamp(104px, 10.6vw, 132px);
+  gap: 4px clamp(10px, 1.2vw, 16px);
+  align-content: center;
+  align-items: center;
+  width: var(--segment-card-width);
+  min-height: var(--segment-step);
   border: 0;
   border-radius: 0;
-  padding: clamp(18px, 2.4vw, 30px) 0;
+  padding: clamp(4px, 0.8vw, 9px) 0;
   background: transparent;
   color: inherit;
   counter-increment: segment-card;
@@ -2100,8 +2105,8 @@ h4 {
 
 .segment-card-photo {
   overflow: hidden;
-  width: min(260px, 100%);
-  margin: 0 0 14px;
+  width: 100%;
+  margin: 0;
   border-radius: 22px 6px 20px 6px;
   background: #fbf7ed;
   box-shadow:
@@ -2110,11 +2115,15 @@ h4 {
 }
 
 .segment-card:nth-child(odd) .segment-card-photo {
-  margin-left: auto;
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  margin-left: 0;
   border-radius: 6px 22px 6px 20px;
 }
 
 .segment-card:nth-child(even) .segment-card-photo {
+  grid-column: 1;
+  grid-row: 1 / span 3;
   margin-left: 0;
   border-radius: 22px 6px 20px 6px;
 }
@@ -2122,21 +2131,34 @@ h4 {
 .segment-card-photo img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9.5;
+  aspect-ratio: 16 / 9.4;
   object-fit: cover;
   filter: saturate(0.9) contrast(1.04);
 }
 
 .segment-card:nth-child(odd) {
   align-self: flex-start;
-  padding-right: clamp(22px, 4vw, 56px);
+  padding-right: clamp(18px, 3vw, 38px);
   text-align: right;
 }
 
 .segment-card:nth-child(even) {
   align-self: flex-end;
-  padding-left: clamp(22px, 4vw, 56px);
+  grid-template-columns: clamp(104px, 10.6vw, 132px) minmax(0, 1fr);
+  padding-left: clamp(18px, 3vw, 38px);
   transform: none;
+}
+
+.segment-card:nth-child(odd) > span,
+.segment-card:nth-child(odd) > h3,
+.segment-card:nth-child(odd) > p {
+  grid-column: 1;
+}
+
+.segment-card:nth-child(even) > span,
+.segment-card:nth-child(even) > h3,
+.segment-card:nth-child(even) > p {
+  grid-column: 2;
 }
 
 .segment-card::before {
@@ -2144,43 +2166,43 @@ h4 {
   position: absolute;
   top: 50%;
   display: grid;
-  width: 52px;
-  height: 52px;
+  width: 38px;
+  height: 38px;
   place-items: center;
   border-radius: 50% 45% 48% 42%;
   background: color-mix(in srgb, var(--theme) 86%, var(--seal));
   color: #fffaf0;
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 900;
   box-shadow: 0 10px 20px rgba(21, 25, 30, 0.14);
   transform: translateY(-50%);
 }
 
 .segment-card:nth-child(odd)::before {
-  right: -85px;
+  right: -67px;
 }
 
 .segment-card:nth-child(even)::before {
-  left: -85px;
+  left: -67px;
 }
 
 .segment-card::after {
   content: "";
   position: absolute;
   top: 50%;
-  width: clamp(34px, 4vw, 58px);
+  width: clamp(24px, 3vw, 42px);
   height: 2px;
   background: color-mix(in srgb, var(--theme) 62%, transparent);
   transform: translateY(-50%);
 }
 
 .segment-card:nth-child(odd)::after {
-  right: -30px;
+  right: -24px;
 }
 
 .segment-card:nth-child(even)::after {
-  left: -30px;
+  left: -24px;
 }
 
 .segment-card:hover,
@@ -2196,24 +2218,29 @@ h4 {
 .segment-card span {
   color: color-mix(in srgb, var(--theme) 72%, #78624a);
   font-family: var(--font-kai);
-  font-size: 17px;
+  font-size: clamp(12px, 0.86vw, 14px);
   font-weight: 800;
+  line-height: 1.32;
 }
 
 .segment-card h3 {
-  margin-top: 9px;
+  margin-top: 3px;
   color: #171a1d;
-  font-size: clamp(31px, 2.5vw, 40px);
-  line-height: 1.16;
+  font-size: clamp(22px, 1.55vw, 27px);
+  line-height: 1.12;
 }
 
 .segment-card p {
-  max-width: 520px;
-  margin: 12px 0 0;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-width: 390px;
+  margin: 4px 0 0;
   color: #3f494b;
   font-family: var(--font-reading);
-  font-size: clamp(20px, 1.28vw, 22px);
-  line-height: 1.95;
+  font-size: clamp(15px, 0.9vw, 17px);
+  line-height: 1.52;
 }
 
 .article-section {
@@ -3001,23 +3028,25 @@ h4 {
   }
 
   .segments {
-    gap: clamp(26px, 5vw, 44px);
+    --segment-card-width: calc(50% - 38px);
+    --segment-step: clamp(126px, 14vw, 142px);
+    gap: clamp(2px, 0.45vw, 6px);
   }
 
   .segment-card:nth-child(odd) {
-    padding-right: 34px;
+    padding-right: 26px;
   }
 
   .segment-card:nth-child(even) {
-    padding-left: 34px;
+    padding-left: 26px;
   }
 
   .segment-card:nth-child(odd)::before {
-    right: -53px;
+    right: -57px;
   }
 
   .segment-card:nth-child(even)::before {
-    left: -53px;
+    left: -57px;
   }
 
   .geo-blocks {
@@ -3088,6 +3117,8 @@ h4 {
   .segment-card,
   .segment-card:nth-child(odd),
   .segment-card:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 0;
     width: auto;
     align-self: stretch;
     min-height: 0;
@@ -3098,7 +3129,18 @@ h4 {
 
   .segment-card:nth-child(odd) .segment-card-photo,
   .segment-card:nth-child(even) .segment-card-photo {
+    grid-column: auto;
+    grid-row: auto;
     margin-left: 0;
+  }
+
+  .segment-card:nth-child(odd) > span,
+  .segment-card:nth-child(odd) > h3,
+  .segment-card:nth-child(odd) > p,
+  .segment-card:nth-child(even) > span,
+  .segment-card:nth-child(even) > h3,
+  .segment-card:nth-child(even) > p {
+    grid-column: auto;
   }
 
   .segment-card:nth-child(even):hover,
@@ -3132,7 +3174,7 @@ h4 {
 
   .route-card {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 16px;
     min-height: 0;
     padding: 20px;
   }
@@ -3144,15 +3186,20 @@ h4 {
   }
 
   .route-card-top {
-    top: clamp(180px, 55vw, 276px);
+    position: relative;
+    top: auto;
     bottom: auto;
-    left: 38px;
+    left: auto;
+    grid-column: 1;
+    grid-row: 2;
     width: min(210px, calc(100% - 76px));
+    min-width: 0;
+    margin: 0 0 0 18px;
   }
 
   .route-card-body {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 3;
     padding-right: 0;
   }
 
@@ -3190,9 +3237,18 @@ h4 {
     width: min(390px, 88vw);
   }
 
+  .route-home-logo {
+    gap: 10px;
+  }
+
   .route-logo-mark {
-    width: min(210px, 62vw);
-    margin-top: -50px;
+    width: min(176px, 54vw);
+    margin-top: 8px;
+    padding: 8px;
+  }
+
+  .route-photo-credit {
+    max-width: min(390px, 88vw);
   }
 
   .section-heading {
